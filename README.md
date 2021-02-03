@@ -2,13 +2,12 @@
 
 ## Members
 
-\Mathias Naess Iversen (mathiasni) - TEAM LEAD
+Mathias Naess Iversen (mathiasni) - TEAM LEAD
 
-\Jakob Slyngstadli (jakobdengode) - PROJECT MANAGER
+Jakob Slyngstadli (jakobdengode) - PROJECT MANAGER
 
-\Jan Erik Syltøy (jeriks31) - TECH LEAD
+Jan Erik Syltøy (jeriks31) - TECH LEAD
 
-\Simen Sørensen (sisorensen) - PRODUCT OWNER
+Simen Sørensen (sisorensen) - PRODUCT OWNER
 
-\Erland Myklebust (emy004) - SUBJECT MATTER EXPERT
-
+Erland Myklebust (emy004) - SUBJECT MATTER EXPERT
