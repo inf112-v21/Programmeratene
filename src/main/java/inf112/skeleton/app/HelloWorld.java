@@ -83,8 +83,6 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
-        layers.get("Player").setCell((int) playerPos.x, (int) playerPos.y, playerCell);
-
         if(layers.get("Hole").getCell((int) playerPos.x, (int) playerPos.y) != null){
             layers.get("Player").setCell((int) playerPos.x, (int) playerPos.y, playerDiedCell);
         }
@@ -94,7 +92,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
         else{
             layers.get("Player").setCell((int) playerPos.x, (int) playerPos.y, playerCell);
         }
-        
+
         renderer.render();
     }
 
