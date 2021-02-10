@@ -2,6 +2,8 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -19,7 +21,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import java.util.HashMap;
 
-public class HelloWorld implements ApplicationListener  {
+public class HelloWorld extends InputAdapter implements ApplicationListener  {
     private SpriteBatch batch;
     private BitmapFont font;
 
@@ -64,6 +66,10 @@ public class HelloWorld implements ApplicationListener  {
         playerDiedCell.setTile(new StaticTiledMapTile(playerTextures[0][1]));
         playerCell.setTile(new StaticTiledMapTile(playerTextures[0][0]));
         playerPos = new Vector2(0, 0);
+
+        // Set up input processor
+        Gdx.input.setInputProcessor(this);
+
     }
 
     @Override
@@ -80,6 +86,23 @@ public class HelloWorld implements ApplicationListener  {
         layers.get("Player").setCell((int) playerPos.x, (int) playerPos.y, playerCell);
 
         renderer.render();
+    }
+
+    @Override
+    public boolean keyUp(int keycode){
+        //Clear current position
+        layers.get("Player").setCell((int) playerPos.x, (int) playerPos.y, new Cell());
+
+        //Update position
+        if (keycode == Input.Keys.UP || keycode == Input.Keys.W)
+            playerPos.add(0, 1);
+        else if (keycode == Input.Keys.DOWN || keycode == Input.Keys.S)
+            playerPos.add(0, -1);
+        else if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A)
+            playerPos.add(-1, 0);
+        else if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)
+            playerPos.add(1, 0);
+        return true;
     }
 
     @Override
