@@ -1,4 +1,4 @@
-package inf112.skeleton.app;
+package game;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -21,7 +21,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import java.util.HashMap;
 
-public class HelloWorld extends InputAdapter implements ApplicationListener {
+public class Game extends InputAdapter implements ApplicationListener {
     private SpriteBatch batch;
     private BitmapFont font;
 
