@@ -21,7 +21,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import java.util.HashMap;
 
-public class HelloWorld extends InputAdapter implements ApplicationListener  {
+public class HelloWorld extends InputAdapter implements ApplicationListener {
     private SpriteBatch batch;
     private BitmapFont font;
 
@@ -85,6 +85,16 @@ public class HelloWorld extends InputAdapter implements ApplicationListener  {
 
         layers.get("Player").setCell((int) playerPos.x, (int) playerPos.y, playerCell);
 
+        if(layers.get("Hole").getCell((int) playerPos.x, (int) playerPos.y) != null){
+            layers.get("Player").setCell((int) playerPos.x, (int) playerPos.y, playerDiedCell);
+        }
+        else if(layers.get("Flag").getCell((int) playerPos.x, (int) playerPos.y) != null){
+            layers.get("Player").setCell((int) playerPos.x, (int) playerPos.y, playerWonCell);
+        }
+        else{
+            layers.get("Player").setCell((int) playerPos.x, (int) playerPos.y, playerCell);
+        }
+        
         renderer.render();
     }
 
