@@ -83,3 +83,12 @@ Brukerhistorienene er listet i prioritert rekkefølge
 		- Implementere grafikk som viser at robot har blitt flyttet
 	- **Akseptansekrav**
 		- Når en spiller legger et kort, beveger roboten seg med henhold til egenskapene til kortet som ble lagt
+## Retrospective for uke 1
+- Kravene for uken er dekket og vi har nådd målene vi satt oss for denne uken
+- Vi valgte å bruke Scrum. Noe som viser seg å være effektivt i dette teamet
+- Vi må sammen gå gjennom oppgaven i plenum (feks i sprinten hver uke)
+- Vi må fokusere på å dele ut oppgaver tidligere (issues)
+- Alle må lage en branch og pushe til master slik at alle har lært dette ila Oblig 2
+## Sprint for uke 2
+- Sette oss inn i LibGdx sin MP modul
+- Lage en plan for hvordan vi kan implementere LibGdx sin MP modul
