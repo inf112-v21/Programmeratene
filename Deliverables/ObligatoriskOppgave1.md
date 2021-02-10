@@ -38,34 +38,48 @@ Målet for applikasjonen er å ha en velfungerende og brukervennlig versjon av R
 Brukerhistorienene er listet i prioritert rekkefølge
 - "Som bruker ønsker å se et spillbrett fordi dette er nødveldig for å kunne spille RoboRally"
 	- **Arbeidsoppgaver**
-	- Implementere et vindu
-	- Implementere et rute kart
-	- Implementere grafikk
-- "Som bruker ønsker jeg brikker på brettet for å kunne se hvor elementer er på brettet"
+		- Lage et spillbrett med Tiled
+		- Vise spillbrettet med libgdx i java
+	- **Akseptansekrav**
+		- Når spillet starter så dukker det opp et spillbrett
+- "Som bruker ønsker jeg å se elementene på brettet for å vite posisjonen til roboten min og posisjonene til andre elementer"
 	- **Arbeidsoppgaver**
-	- Lage tiles
-	- Lage teksturer
-	- Implementere grafikken
+		- Lage tiles
+		- Lage teksturer
+		- Implementere grafikken
+	- **Akseptansekrav**
+		- Om det finnes elementer på brettet så vises disse på det grafiske spillbrettet
 - "Som bruker ønsker jeg å flytte brikker på brettet fordi dette er et interaktivt spill"
 	- **Arbeidsoppgaver**
-	- Implementere logikk for bevegelse
-- "Som bruker ønsker å besøke flaggene på brettet fordi dette er nødvendig for å vinne spillet"
+		- Implementere logikk for bevegelse
+	- **Akseptansekrav**
+		- Det går an å gi input til spillet slik at spillerbrikken beveger seg på spillbrettet
+- "Som bruker ønsker jeg å kunne besøke flaggene på brettet for å vinne spillet"
 	- **Arbeidsoppgaver**
-	- Implementere visningsgrafikk for flagg
-	- Implementere logikk for besøk av flagg
-	- Implementere logikk for "WinCon"
-- "Som bruker ønsker jeg å se andre spillere og se dem flytte seg for å kunne spille flespiller"
+		- Implementere visningsgrafikk for flagg
+		- Implementere logikk for besøk av flagg
+		- Implementere logikk for seier når alle flagg er besøkt i riktig rekkefølge
+	- **Akseptansekrav**
+		- Spillerbrikken kan bevege seg til flagg på kartet
+		- Om spillerbrikken besøker alle flaggene i riktig rekkefølge vinner spilleren spillet
+- "Som bruker ønsker jeg å se andre spillere og se dem flytte seg for å kunne spille flerspiller"
 	- **Arbeidsoppgaver**
-	- Implementere logikk for flesspiller
-	- Implementere grafikk for flere spillere
-	- Implementere "turnBase" logikk
+		- Implementere logikk for flerspiller
+		- Implementere grafikk for flere spillere
+		- Implementere "turnBase" logikk
+	- **Akseptansekrav**
+		- To brukere kan være aktiv på samme spillbrett og se hverandres brikker i korrekt posisjon
 - "Som bruker ønsker jeg å kunnne bli tildelt kort for å kunne programmere roboten min"
 	- **Arbeidsoppgaver**
-	- Implementere kort
-	- Lage logikk for utdeling av kort
-	- Vise spillerene sine kort
-	- Implementere logikk slik at spillere får totalt 5 kort
-- "Som bruker ønsker jeg å kunnne bevege min robot ved hjelp av kortene mine"
+		- Implementere kort
+		- Lage logikk for utdeling av kort
+		- Lage logikk for visning av kort til brukeren
+	- **Akseptansekrav**
+		- Det finnes kort i spillet som kan deles ut til spillerene
+		- Hver spiller kan se kortene de har fått tildelt
+- "Som bruker ønsker jeg å kunnne "spille" et kort for å bevege roboten min"
 	- **Arbeidsoppgaver**
-	- Implementere logikk for valgte kort og bevegelse
-	- Implementere grafikk som viser at robot har blitt flyttet
+		- Implementere logikk for valgte kort og bevegelse
+		- Implementere grafikk som viser at robot har blitt flyttet
+	- **Akseptansekrav**
+		- Når en spiller legger et kort, beveger roboten seg med henhold til egenskapene til kortet som ble lagt
