@@ -1,4 +1,4 @@
-package inf112.skeleton.app;
+package game;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
@@ -9,6 +9,6 @@ public class Main {
         cfg.setTitle("example-board");
         cfg.setWindowedMode(500, 500);
 
-        new Lwjgl3Application(new HelloWorld(), cfg);
+        new Lwjgl3Application(new Game(), cfg);
     }
 }
