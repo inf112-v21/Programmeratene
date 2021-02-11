@@ -83,6 +83,29 @@ Brukerhistorienene er listet i prioritert rekkefølge
 		- Implementere grafikk som viser at robot har blitt flyttet
 	- **Akseptansekrav**
 		- Når en spiller legger et kort, beveger roboten seg med henhold til egenskapene til kortet som ble lagt
+	
+## Kjøring og manuelle tester
+For å kjøre programmet:
+Kjør Main.main()
+
+Vi har så langt brukt manuelle tester for å sjekke win-condition (flagg) og losing-condition (hull). 
+- Test for loss på hull:
+  - Steg 1: Kjør Main
+  - Steg 2: Bruk piltaster eller wasd for å flytte brikken, flytte brikken til hullet
+  - Steg 3: observer endring i grafikken (brikke får røde øyne)
+  
+- Test for win på flagg:
+  - Steg 1: Kjør Main
+  - Steg 2: Bruk piltaster eller wasd for å flytte brikken, flytte brikken til flagget
+  - Steg 3: observer endring i grafikken (blå konfetti ved brikken)
+	
+Testene funket vellykket på alle pcene. Testet på mac og windows 10.
+
+## Commits/git
+Commitsene er noe skjevt fordelt i første innlevering. Dette kommer av at vi har diskutert og 
+arbeidet mye sammen, mens en person skriver det vi kommer med. Vi har brukt en god del skjermdeling, 
+samt også reviewet hverandres arbeid etterpå. 
+
 ## Retrospective for uke 1
 - Kravene for uken er dekket og vi har nådd målene vi satt oss for denne uken
 - Vi valgte å bruke Scrum. Noe som viser seg å være effektivt i dette teamet
