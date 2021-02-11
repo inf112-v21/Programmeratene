@@ -9,4 +9,4 @@ RoboRally spill med libgdx <br/>
 ##### Jakob Slyngstadli (jakobdengode) - PROJECT MANAGER
 ##### Jan Erik Syltøy (jeriks31) - TECH LEAD
 ##### Simen Sørensen (sisorensen) - PRODUCT OWNER
-##### Erland Myklebust (emy004) - SUBJECT MATTER EXPERT# INF112 Gruppe 10 - Lag 4 Programmeratene
+##### Erland Myklebust (emy004) - SUBJECT MATTER EXPERT
