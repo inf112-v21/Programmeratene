@@ -1,4 +1,4 @@
 package player;
 
-public class ComputerPlayer {
+public class ComputerPlayer extends AbstractPlayer {
 }

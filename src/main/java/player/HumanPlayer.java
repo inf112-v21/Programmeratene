@@ -1,4 +1,4 @@
 package player;
 
-public class HumanPlayer {
+public class HumanPlayer extends AbstractPlayer{
 }
