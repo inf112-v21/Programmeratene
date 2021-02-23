@@ -1,5 +1,9 @@
 package card;
 
+import com.badlogic.gdx.math.Vector2;
+
+import java.util.ArrayList;
+
 /**
  * Moves robot
  * -1 = 1 step back
@@ -10,11 +14,13 @@ package card;
 public class CardMove implements ICard{
     int steps;
     int priority;
+    private Vector2 playerPos;
 
     public CardMove(int steps, int priority){
         this.steps = steps;
         this.priority = priority;
     }
+
 
     /**
      * @return priority value of the card as an int
@@ -24,3 +30,5 @@ public class CardMove implements ICard{
         return priority;
     }
 }
+
+
