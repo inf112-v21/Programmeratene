@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class CardMove implements ICard{
     int steps;
     int priority;
-    private Vector2 playerPos;
 
     public CardMove(int steps, int priority){
         this.steps = steps;
