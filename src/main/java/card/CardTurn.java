@@ -1,5 +1,6 @@
 package card;
 
+import game.Direction;
 /**
  * Changes orientation of the robot
  * -1 = left turn
@@ -14,6 +15,12 @@ public class CardTurn implements ICard{
         this.turnSteps = turnSteps;
         this.priority = priority;
     }
+
+    public void checkPriority() {
+
+    }
+
+
 
     /**
      * @return priority value of the card as an int
