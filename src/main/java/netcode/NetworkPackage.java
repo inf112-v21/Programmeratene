@@ -1,4 +1,4 @@
-package game;
+package netcode;
 
 import card.ICard;
 
