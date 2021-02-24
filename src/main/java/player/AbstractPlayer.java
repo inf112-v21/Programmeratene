@@ -39,7 +39,6 @@ public abstract class AbstractPlayer implements IPlayer {
     public void moveRobot(int steps) {
         if(orientation == Direction.NORTH) {
             playerPos.add(0,steps);
-            System.out.println("Took a step");
         }
         else if(orientation == Direction.SOUTH) {
             playerPos.add(0,-steps);
