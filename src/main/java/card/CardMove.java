@@ -20,6 +20,9 @@ public class CardMove implements ICard{
         this.priority = priority;
     }
 
+    public CardMove(){
+    }
+
 
     /**
      * @return priority value of the card as an int
