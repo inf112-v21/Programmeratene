@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
-    ArrayList<ICard> cards;
+    public ArrayList<ICard> cards;
 
     public Deck(){
+        cards = new ArrayList<>();
         generateFullDeck();
     }
 

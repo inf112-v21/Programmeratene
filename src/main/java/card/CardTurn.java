@@ -16,6 +16,9 @@ public class CardTurn implements ICard{
         this.priority = priority;
     }
 
+    public CardTurn(){
+    }
+
     public void checkPriority() {
 
     }
