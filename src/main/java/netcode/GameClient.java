@@ -18,11 +18,7 @@ public class GameClient extends Listener {
     public static void main(String[] args) throws Exception {
         client = new Client();
 
-        client.getKryo().register(NetworkPackage.class);
-        client.getKryo().register(ArrayList.class);
-        client.getKryo().register(ICard.class);
-        client.getKryo().register(CardMove.class);
-        client.getKryo().register(CardTurn.class);
+        ClassRegister.registerAll(client.getKryo());
 
         client.start();
         client.connect(5000, ip, tcpPort, udpPort);
