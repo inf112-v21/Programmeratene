@@ -43,18 +43,6 @@ public class Host extends Listener {
         c.sendTCP(testPacket);
     }
 
-    /**
-     * if damage == 0 then deal 9 cards else deal 9 - damage tokens
-     *
-
-    void deliverCardsToPlayer() {
-        for(int i = 0; i < 9; i++) {
-            playerCards.add(deck.get(0));
-            deck.remove(0);
-        }
-    }
-     */
-
     //This is run when we receive a packet
     public void received(Connection c, Object p) {
 
