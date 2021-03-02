@@ -10,8 +10,6 @@ import java.util.ArrayList;
 public class Host extends Listener {
     static Server server;
     static int udpPort = 27960, tcpPort = 27960;
-    ArrayList<ICard> deck = new Deck().cards;
-    ArrayList<ICard> playerCards;
 
     public static void main(String[] args) throws Exception {
         System.out.println("Creating the server...");
@@ -36,8 +34,11 @@ public class Host extends Listener {
         System.out.println("Received a connection from "+c.getRemoteAddressTCP().getHostString());
 
         NetworkPackage testPacket = new NetworkPackage();
-        deliverCardsToPlayer();
-        testPacket.cards = playerCards;
+        ArrayList<ICard> deck = new Deck().cards;
+        for(int i = 0; i < 9; i++) {
+            testPacket.cards.add(deck.get(0));
+            deck.remove(0);
+        }
 
         c.sendTCP(testPacket);
     }
@@ -45,13 +46,14 @@ public class Host extends Listener {
     /**
      * if damage == 0 then deal 9 cards else deal 9 - damage tokens
      *
-     */
+
     void deliverCardsToPlayer() {
         for(int i = 0; i < 9; i++) {
             playerCards.add(deck.get(0));
             deck.remove(0);
         }
     }
+     */
 
     //This is run when we receive a packet
     public void received(Connection c, Object p) {
