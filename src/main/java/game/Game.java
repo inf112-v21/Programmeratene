@@ -9,7 +9,6 @@ import player.HumanPlayer;
 import player.IPlayer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Game extends InputAdapter {
     ArrayList<IPlayer> players;
