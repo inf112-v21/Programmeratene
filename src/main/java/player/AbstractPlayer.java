@@ -1,7 +1,7 @@
 package player;
 
-import card.ICard;
 import game.Direction;
+import card.*;
 import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 
@@ -70,6 +70,17 @@ public abstract class AbstractPlayer implements IPlayer {
             orientation = orientation.getReverse();
         }
         return orientation;
+    }
+
+    /**
+     * if damage == 0 then deal 9 cards else deal 9 - damage tokens
+     *
+     */
+    void deliverCardsToPlayer() {
+        for(int i = 0; i == 9 - damageTokens; i++) {
+            deck.add(card.Deck.cards.get(0));
+            card.Deck.cards.remove(0);
+        }
     }
 
     /**
