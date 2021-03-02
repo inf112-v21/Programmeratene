@@ -72,16 +72,6 @@ public abstract class AbstractPlayer implements IPlayer {
         return orientation;
     }
 
-    /**
-     * if damage == 0 then deal 9 cards else deal 9 - damage tokens
-     *
-     */
-    void deliverCardsToPlayer() {
-        for(int i = 0; i == 9 - damageTokens; i++) {
-            deck.add(card.Deck.cards.get(0));
-            card.Deck.cards.remove(0);
-        }
-    }
 
     /**
      * Clear non-locked registers

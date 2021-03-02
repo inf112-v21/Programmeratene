@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
-    public static ArrayList<ICard> cards;
+    public ArrayList<ICard> cards;
 
     public Deck(){
         cards = new ArrayList<>();
@@ -25,6 +25,7 @@ public class Deck {
             cards.add(new CardMove(-1, 430 + 10*i)); //move backwards 1
             cards.add(new CardTurn(2, 10 + 10*i)); //rotate 180deg
         }
+        shuffle();
     }
 
     void shuffle(){
