@@ -8,6 +8,7 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Client;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GameClient extends Listener {
     static Client client;
@@ -40,8 +41,31 @@ public class GameClient extends Listener {
         if(p instanceof NetworkPackage){
             ArrayList<ICard> cards = ((NetworkPackage) p).cards;
             System.out.println("Received deck: " + cards.toString());
+            pick(cards);
 
             messageReceived = true;
         }
+    }
+    public ArrayList pick(ArrayList<ICard> deck) {
+        ArrayList<ICard> list = new ArrayList<>();
+        ArrayList<Integer> indices = new ArrayList<>();
+        Scanner myScanner = new Scanner(System.in);
+        while (list.size() < 5) {
+            System.out.println("Program your robot: ");
+            Integer index = myScanner.nextInt();
+            if (indices.contains(index)) {
+                System.out.println("You have already picked this card");
+
+            }
+            else if (index>deck.size() && index<1){
+                System.out.println("Invalid input");
+            }
+            else {
+                indices.add(index);
+                list.add(deck.get(index - 1));
+            }
+            System.out.println(list);
+        }
+        return (list);
     }
 }
