@@ -10,3 +10,8 @@ RoboRally spill med libgdx <br/>
 ##### Jan Erik Syltøy (jeriks31) - TECH LEAD
 ##### Simen Sørensen (sisorensen) - PRODUCT OWNER
 ##### Erland Myklebust (emy004) - SUBJECT MATTER EXPERT
+
+## How to run
+1. Clone repository from https://github.com/inf112-v21/Programmeratene
+2. Open repository in your IDE as a Maven project
+3. Run Main.main() 
