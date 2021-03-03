@@ -78,9 +78,9 @@ public class GUI implements ApplicationListener {
     }
 
     public void startAsHost(){
-        gameClient = new GameClient();
         try {
             host = new Host();
+            gameClient = host.getGameClient();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Kryonet server couldn't bind to ports");

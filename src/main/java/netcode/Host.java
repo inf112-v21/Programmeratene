@@ -38,6 +38,7 @@ public class Host extends Listener {
         IPlayer newPlayer = new ComputerPlayer(c.getRemoteAddressTCP().getHostString());
         playerMap.put(c, newPlayer);
         gameClient.getGame().getBoard().addPlayer(newPlayer);
+        gameClient.getGame().getBoard().updatePlayerPos();
 
         dealCards();
     }
@@ -49,6 +50,8 @@ public class Host extends Listener {
             System.out.println("Host received cards: " + cards.toString());
 
             playerMap.get(c).setRegisters(cards);
+
+            processRound();
         }
     }
 
@@ -56,6 +59,7 @@ public class Host extends Listener {
 
         for(int i=0; i<5; i++) { //5 faser :)
             for (IPlayer player : playerMap.values()) {
+                gameClient.getGame().getBoard().clearPos(player.getPos());
                 ICard currentCard = player.getRegisters().get(i);
                 if (currentCard instanceof CardMove)
                     player.moveRobot(((CardMove) currentCard).getSteps());
@@ -63,6 +67,13 @@ public class Host extends Listener {
                     player.rotateRobot(((CardTurn) currentCard).getTurnSteps());
             }
             gameClient.getGame().getBoard().updatePlayerPos();
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
@@ -80,5 +91,9 @@ public class Host extends Listener {
         }
 
         server.getConnections()[0].sendTCP(testPacket);
+    }
+
+    public GameClient getGameClient() {
+        return gameClient;
     }
 }

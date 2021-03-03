@@ -42,6 +42,8 @@ public interface IPlayer {
      */
     Vector2 getPos();
 
+    String getPlayerName();
+
     public Direction getOrientation();
 
     public ArrayList<ICard> getRegisters();

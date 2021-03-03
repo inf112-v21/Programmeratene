@@ -75,6 +75,11 @@ public abstract class AbstractPlayer implements IPlayer {
     }
 
     @Override
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    @Override
     public void clearRegisters() {
         //TODO
     }

@@ -34,22 +34,24 @@ public class Board implements IBoard {
 
         this.players = new ArrayList<>();
         playerCells = new ArrayList<>();
+
+        for(int i=0; i<8; i++){
+            Cell playerCell = new Cell();
+            playerCell.setTile(new StaticTiledMapTile(new TextureRegion(new Texture("robots/"+robotTextureNames[i]+".png"))));
+            playerCells.add(playerCell);
+        }
     }
 
     public void addPlayer(IPlayer player){
-        int i=players.size();
-
-        Cell playerCell = new Cell();
-        playerCell.setTile(new StaticTiledMapTile(new TextureRegion(new Texture("robots/"+robotTextureNames[i]+".png"))));
-
         players.add(player);
-        playerCells.add(i, playerCell);
     }
 
     public void updatePlayerPos() {
         for(int i=0; i<players.size(); i++){
+
             IPlayer player = players.get(i);
             Vector2 pos = player.getPos();
+            System.out.println("Drawing position of player "+player.getPlayerName()+" in position ("+pos.x+", "+pos.y+") facing "+player.getOrientation());
 
             switch (player.getOrientation()){
                 case NORTH:
