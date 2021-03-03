@@ -23,10 +23,12 @@ public class CardMove implements ICard{
 
     @Override
     public String toString() {
-        return "CardMove{" +
-                "steps=" + steps +
-                ", priority=" + priority +
-                '}';
+        if(steps==-1){
+            return "Beveg " + steps + " bakover " + "(" + priority + ")";
+        }
+        else{
+            return "Beveg " + steps + " frem " + "(" + priority + ")";
+        }
     }
 
     /**

@@ -28,10 +28,18 @@ public class CardTurn implements ICard{
 
     @Override
     public String toString() {
-        return "CardTurn{" +
-                "turnSteps=" + turnSteps +
-                ", priority=" + priority +
-                '}';
+        if(turnSteps == -1){
+            return "Snu høyre " + "(" + priority + ")";
+        }
+        else if(turnSteps == 1){
+            return "Snu høyre " + "(" + priority + ")";
+        }
+        else if(turnSteps == 2){
+            return "Snu 180 " + "(" + priority + ")";
+        }
+        else{
+            return super.toString();
+        }
     }
 
     public int getTurnSteps() {
