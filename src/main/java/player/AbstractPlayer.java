@@ -15,30 +15,27 @@ public abstract class AbstractPlayer implements IPlayer {
     Direction orientation;
     Vector2 playerPos;
 
-    /**
-     * Adds damage tokens to the player
-     *
-     * @param damageTaken - amount of damage tokens to add
-     */
+    AbstractPlayer(String playerName){
+        this.playerName = playerName;
+        this.deck = new ArrayList<>();
+        this.registers = new ArrayList<>();
+        this.lockedRegisters = new ArrayList<>();
+        this.damageTokens = 0;
+        this.lifeTokens = 3;
+        this.orientation = Direction.NORTH;
+        this.playerPos = new Vector2(0,0);
+    }
+
     @Override
     public void applyDamage(int damageTaken) {
         //TODO
     }
 
-    /**
-     * Removes damage tokens from the player
-     *
-     * @param repairAmount - amount of damage tokens to remove
-     */
     @Override
     public void repair(int repairAmount) {
         //TODO
     }
 
-    /**
-     *
-     * @param steps - number of steps the robot moves -> -1, 1, 2, 3
-     */
     public void moveRobot(int steps) {
         if(orientation == Direction.NORTH) {
             playerPos.add(0,steps);
@@ -54,12 +51,7 @@ public abstract class AbstractPlayer implements IPlayer {
         }
     }
 
-    /**
-     *
-     * @param turnSteps - amount of steps the robot should rotate
-     * @return the new direction of the robot
-     */
-    public Direction rotation(int turnSteps) {
+    public Direction rotateRobot(int turnSteps) {
         if(turnSteps == -1) {
             orientation = orientation.getLeft();
         }
@@ -72,12 +64,18 @@ public abstract class AbstractPlayer implements IPlayer {
         return orientation;
     }
 
-
-    /**
-     * Clear non-locked registers
-     */
     @Override
     public void clearRegisters() {
         //TODO
+    }
+
+    @Override
+    public Vector2 getPos() {
+        return playerPos;
+    }
+
+    @Override
+    public Direction getOrientation() {
+        return orientation;
     }
 }

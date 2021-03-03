@@ -16,11 +16,7 @@ public class Host extends Listener {
 
         server = new Server();
 
-        server.getKryo().register(NetworkPackage.class);
-        server.getKryo().register(ArrayList.class);
-        server.getKryo().register(ICard.class);
-        server.getKryo().register(CardMove.class);
-        server.getKryo().register(CardTurn.class);
+        ClassRegister.registerAll(server.getKryo());
 
         server.bind(tcpPort,udpPort);
         server.start();
