@@ -10,10 +10,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameClient extends Listener {
-    static Client client;
-    static String ip = "localhost";
-    static int udpPort = 27960, tcpPort = 27960;
-    static boolean messageReceived = false;
+    private static final int udpPort = 27960;
+    private static final int tcpPort = 27960;
+    Client client;
     Game game;
 
     public GameClient() {
@@ -47,8 +46,6 @@ public class GameClient extends Listener {
             ArrayList<ICard> cards = ((NetworkPackage) p).cards;
             System.out.println("Received deck: " + cards.toString());
             pick(cards);
-
-            messageReceived = true;
         }
     }
 
