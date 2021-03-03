@@ -16,8 +16,8 @@ import java.util.HashMap;
 public class Board implements IBoard {
     private static String[] layerNames = {"Board","Hole","Flag","Player"};
     private static String[] robotTextureNames = {"RobotRed", "RobotBlue", "RobotGreen", "RobotYellow", "RobotCyan", "RobotOrange", "RobotPink", "RobotPurple"};
-    private static int BOARD_WIDTH = 5;
-    private static int BOARD_HEIGHT = 5;
+    private int BOARD_WIDTH = 5;
+    private int BOARD_HEIGHT = 5;
 
     private int tileTextureSize = 300; //Size of tile-textures in pixels (From Tiled-editor)
     private TiledMap tiledMap;
@@ -41,6 +41,10 @@ public class Board implements IBoard {
             playerCell.setTile(new StaticTiledMapTile(new TextureRegion(new Texture("robots/"+robotTextureNames[i]+".png"))));
             playerCells.add(i, playerCell);
         }
+    }
+
+    public void addPlayer(IPlayer player){
+
     }
 
     public void updatePlayerPos() {

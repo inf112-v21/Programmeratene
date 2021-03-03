@@ -4,6 +4,7 @@ import game.Direction;
 import card.*;
 import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractPlayer implements IPlayer {
     String playerName;
@@ -62,6 +63,15 @@ public abstract class AbstractPlayer implements IPlayer {
             orientation = orientation.getReverse();
         }
         return orientation;
+    }
+
+    public void setRegisters(ArrayList<ICard> cardsToAdd){
+        this.registers = cardsToAdd;
+    }
+
+    @Override
+    public ArrayList<ICard> getRegisters() {
+        return registers;
     }
 
     @Override

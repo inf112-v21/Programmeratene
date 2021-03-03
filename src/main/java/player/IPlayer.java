@@ -1,7 +1,10 @@
 package player;
 
+import card.ICard;
 import com.badlogic.gdx.math.Vector2;
 import game.Direction;
+
+import java.util.ArrayList;
 
 public interface IPlayer {
     /**
@@ -41,4 +44,7 @@ public interface IPlayer {
 
     public Direction getOrientation();
 
+    public ArrayList<ICard> getRegisters();
+
+    public void setRegisters(ArrayList<ICard> cardsToAdd);
 }

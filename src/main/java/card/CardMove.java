@@ -37,6 +37,10 @@ public class CardMove implements ICard{
         return priority;
     }
 
+    public int getSteps() {
+        return steps;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

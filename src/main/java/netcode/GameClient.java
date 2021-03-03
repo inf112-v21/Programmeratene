@@ -46,11 +46,15 @@ public class GameClient extends Listener {
     }
 
     public void received(Connection c, Object p) {
-        System.out.println("Received a packet: " + p.toString());
         if(p instanceof NetworkPackage){
             ArrayList<ICard> cards = ((NetworkPackage) p).cards;
-            System.out.println("Received deck: " + cards.toString());
+            System.out.println("Client received cards: " + cards.toString());
+
             ArrayList<ICard> chosenCards = pick(cards);
+
+            NetworkPackage testPacket = new NetworkPackage();
+            testPacket.cards = chosenCards;
+            c.sendTCP(testPacket);
         }
     }
 
@@ -59,7 +63,7 @@ public class GameClient extends Listener {
         ArrayList<Integer> indices = new ArrayList<>();
         Scanner myScanner = new Scanner(System.in);
         while (list.size() < 5) {
-            System.out.println("Program your robot: ");
+            System.out.print("Program your robot: ");
             Integer index = myScanner.nextInt();
             if (indices.contains(index)) {
                 System.out.println("You have already picked this card");
