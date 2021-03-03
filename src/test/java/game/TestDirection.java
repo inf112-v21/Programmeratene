@@ -1,6 +1,6 @@
 package game;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class TestDirection {
@@ -23,4 +23,5 @@ public class TestDirection {
         orientation = Direction.NORTH;
         assertEquals(orientation.getRight(), Direction.EAST);
     }
+
 }
