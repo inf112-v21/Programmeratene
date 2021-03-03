@@ -1,9 +1,6 @@
 package netcode;
 
-import card.CardMove;
-import card.CardTurn;
-import card.Deck;
-import card.ICard;
+import card.*;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
@@ -25,7 +22,6 @@ public class Host extends Listener {
         server.start();
 
         server.addListener(new Host());
-
         System.out.println("Server is operational");
     }
 
@@ -34,7 +30,11 @@ public class Host extends Listener {
         System.out.println("Received a connection from "+c.getRemoteAddressTCP().getHostString());
 
         NetworkPackage testPacket = new NetworkPackage();
-        testPacket.cards = new Deck().cards;
+        ArrayList<ICard> deck = new Deck().cards;
+        for(int i = 0; i < 9; i++) {
+            testPacket.cards.add(deck.get(0));
+            deck.remove(0);
+        }
 
         c.sendTCP(testPacket);
     }

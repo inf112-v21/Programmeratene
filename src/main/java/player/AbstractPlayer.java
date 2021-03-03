@@ -1,7 +1,7 @@
 package player;
 
-import card.ICard;
 import game.Direction;
+import card.*;
 import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 
@@ -63,7 +63,6 @@ public abstract class AbstractPlayer implements IPlayer {
         }
         return orientation;
     }
-
 
     @Override
     public void clearRegisters() {

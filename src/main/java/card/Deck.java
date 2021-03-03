@@ -25,23 +25,12 @@ public class Deck {
             cards.add(new CardMove(-1, 430 + 10*i)); //move backwards 1
             cards.add(new CardTurn(2, 10 + 10*i)); //rotate 180deg
         }
+        shuffle();
     }
 
     void shuffle(){
         Collections.shuffle(cards);
     }
 
-    /**
-     * Gjøres ferdig senere ish
-     * if damage == 0 then deal 9 cards else deal 9 - damage tokens
-     * @param n - damage taken from player
-     *
-     */
-    void deliverCardsToPlayer(int n) {
-        for(int i = 0; i == 9 - n; i++) {
-            //playerDeck.add(cards.get(0));
-            //cards.remove(0);
-        }
-    }
 
 }
