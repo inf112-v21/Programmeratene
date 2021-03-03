@@ -16,29 +16,24 @@ public class GameClient extends Listener {
     static boolean messageReceived = false;
     Game game;
 
-    public static void main(String[] args) throws Exception {
+    public GameClient() {
         client = new Client();
-
         ClassRegister.registerAll(client.getKryo());
-
         client.start();
-        client.connect(5000, ip, tcpPort, udpPort);
-
         client.addListener(new GameClient());
+    }
 
-        System.out.println("Client is waiting for a packet...");
+    public GameClient(boolean isHost) {
+        this();
 
-        while(!messageReceived) {
-            Thread.sleep(1000);
-        }
-
-        System.out.println("Client will now exit.");
-        System.exit(0);
+        if(isHost)
+            connectTo("localhost");
     }
 
     public boolean connectTo(String ip){
         try {
             client.connect(5000, ip, tcpPort, udpPort);
+            System.out.println("Client is waiting for a packet...");
             return true;
         }
         catch(Exception e) {
