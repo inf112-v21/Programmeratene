@@ -19,7 +19,7 @@ public class GameClient extends Listener {
         client = new Client();
         ClassRegister.registerAll(client.getKryo());
         client.start();
-        client.addListener(new GameClient());
+        client.addListener(this);
     }
 
     public GameClient(boolean isHost) {
@@ -32,12 +32,15 @@ public class GameClient extends Listener {
     public boolean connectTo(String ip){
         try {
             client.connect(5000, ip, tcpPort, udpPort);
-            System.out.println("Client is waiting for a packet...");
             return true;
         }
         catch(Exception e) {
             return false;
         }
+    }
+
+    public void connected(Connection c) {
+        System.out.println("Connected to host, waiting for packet...");
     }
 
     public void received(Connection c, Object p) {
