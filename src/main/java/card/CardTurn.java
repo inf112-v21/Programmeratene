@@ -20,10 +20,16 @@ public class CardTurn implements ICard{
     }
 
     public void checkPriority() {
-
+        
     }
 
-
+    @Override
+    public String toString() {
+        return "CardTurn{" +
+                "turnSteps=" + turnSteps +
+                ", priority=" + priority +
+                '}';
+    }
 
     /**
      * @return priority value of the card as an int

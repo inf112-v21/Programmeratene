@@ -23,6 +23,13 @@ public class CardMove implements ICard{
     public CardMove(){
     }
 
+    @Override
+    public String toString() {
+        return "CardMove{" +
+                "steps=" + steps +
+                ", priority=" + priority +
+                '}';
+    }
 
     /**
      * @return priority value of the card as an int
