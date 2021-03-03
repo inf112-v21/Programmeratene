@@ -48,7 +48,7 @@ public class GameClient extends Listener {
         if(p instanceof NetworkPackage){
             ArrayList<ICard> cards = ((NetworkPackage) p).cards;
             System.out.println("Received deck: " + cards.toString());
-            pick(cards);
+            ArrayList<ICard> chosenCards = pick(cards);
         }
     }
 
@@ -62,7 +62,7 @@ public class GameClient extends Listener {
             if (indices.contains(index)) {
                 System.out.println("You have already picked this card");
 
-            } else if (index > deck.size() && index < 1) {
+            } else if (index > deck.size() || index < 1) {
                 System.out.println("Invalid input");
             } else {
                 indices.add(index);
