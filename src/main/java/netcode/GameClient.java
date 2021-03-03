@@ -20,6 +20,8 @@ public class GameClient extends Listener {
         ClassRegister.registerAll(client.getKryo());
         client.start();
         client.addListener(this);
+
+        game = new Game();
     }
 
     public GameClient(boolean isHost) {
