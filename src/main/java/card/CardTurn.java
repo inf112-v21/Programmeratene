@@ -1,6 +1,9 @@
 package card;
 
 import game.Direction;
+
+import java.util.Objects;
+
 /**
  * Changes orientation of the robot
  * -1 = left turn
@@ -37,5 +40,18 @@ public class CardTurn implements ICard{
     @Override
     public int getPriority() {
         return priority;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CardTurn cardTurn = (CardTurn) o;
+        return turnSteps == cardTurn.turnSteps && priority == cardTurn.priority;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(turnSteps, priority);
     }
 }
