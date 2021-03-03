@@ -28,10 +28,7 @@ public class CardTurn implements ICard{
 
     @Override
     public String toString() {
-        return "CardTurn{" +
-                "turnSteps=" + turnSteps +
-                ", priority=" + priority +
-                '}';
+        return "CardTurn{" + "turnSteps=" + turnSteps + ", priority=" + priority + '}';
     }
 
     public int getTurnSteps() {
