@@ -25,26 +25,25 @@ public class Board implements IBoard {
     private ArrayList<Cell> playerCells;
     private ArrayList<IPlayer> players;
 
-    public Board(ArrayList<IPlayer> players){
+    public Board(){
         // Set up TiledMap with layers
         tiledMap = new TmxMapLoader().load("example.tmx");
         layers = new HashMap<>();
         for (String layerName : layerNames)
             layers.put(layerName, (TiledMapTileLayer) tiledMap.getLayers().get(layerName));
 
-        this.players = players;
+        this.players = new ArrayList<>();
         playerCells = new ArrayList<>();
-
-        // Set up Playercells
-        for(int i=0; i<players.size(); i++){
-            Cell playerCell = new Cell();
-            playerCell.setTile(new StaticTiledMapTile(new TextureRegion(new Texture("robots/"+robotTextureNames[i]+".png"))));
-            playerCells.add(i, playerCell);
-        }
     }
 
     public void addPlayer(IPlayer player){
+        int i=players.size();
 
+        Cell playerCell = new Cell();
+        playerCell.setTile(new StaticTiledMapTile(new TextureRegion(new Texture("robots/"+robotTextureNames[i]+".png"))));
+
+        players.add(player);
+        playerCells.add(i, playerCell);
     }
 
     public void updatePlayerPos() {

@@ -5,7 +5,6 @@ import board.IBoard;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import player.HumanPlayer;
 import player.IPlayer;
 
 import java.util.ArrayList;
@@ -16,10 +15,7 @@ public class Game extends InputAdapter {
 
     public Game(){
         players = new ArrayList<>();
-        players.add(new HumanPlayer("HumanPlayer1"));
-        players.add(new HumanPlayer("HumanPlayer2"));
-
-        board = new Board(players);
+        board = new Board();
 
         // Set up input processor
         Gdx.input.setInputProcessor(this);

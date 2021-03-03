@@ -35,7 +35,9 @@ public class Host extends Listener {
     public void connected(Connection c) {
         System.out.println("Received a connection from "+c.getRemoteAddressTCP().getHostString());
 
-        playerMap.put(c, new ComputerPlayer(c.getRemoteAddressTCP().getHostString()));
+        IPlayer newPlayer = new ComputerPlayer(c.getRemoteAddressTCP().getHostString());
+        playerMap.put(c, newPlayer);
+        gameClient.getGame().getBoard().addPlayer(newPlayer);
 
         dealCards();
     }
@@ -60,6 +62,7 @@ public class Host extends Listener {
                 else if (currentCard instanceof CardTurn)
                     player.rotateRobot(((CardTurn) currentCard).getTurnSteps());
             }
+            gameClient.getGame().getBoard().updatePlayerPos();
         }
     }
 
