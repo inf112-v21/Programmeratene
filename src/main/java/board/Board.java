@@ -16,8 +16,8 @@ import java.util.HashMap;
 public class Board implements IBoard {
     private static String[] layerNames = {"Board","Hole","Flag","Player"};
     private static String[] robotTextureNames = {"RobotRed", "RobotBlue", "RobotGreen", "RobotYellow", "RobotCyan", "RobotOrange", "RobotPink", "RobotPurple"};
-    private static int BOARD_WIDTH = 5;
-    private static int BOARD_HEIGHT = 5;
+    private int BOARD_WIDTH = 5;
+    private int BOARD_HEIGHT = 5;
 
     private int tileTextureSize = 300; //Size of tile-textures in pixels (From Tiled-editor)
     private TiledMap tiledMap;
@@ -25,28 +25,33 @@ public class Board implements IBoard {
     private ArrayList<Cell> playerCells;
     private ArrayList<IPlayer> players;
 
-    public Board(ArrayList<IPlayer> players){
+    public Board(){
         // Set up TiledMap with layers
         tiledMap = new TmxMapLoader().load("example.tmx");
         layers = new HashMap<>();
         for (String layerName : layerNames)
             layers.put(layerName, (TiledMapTileLayer) tiledMap.getLayers().get(layerName));
 
-        this.players = players;
+        this.players = new ArrayList<>();
         playerCells = new ArrayList<>();
 
-        // Set up Playercells
-        for(int i=0; i<players.size(); i++){
+        for(int i=0; i<8; i++){
             Cell playerCell = new Cell();
             playerCell.setTile(new StaticTiledMapTile(new TextureRegion(new Texture("robots/"+robotTextureNames[i]+".png"))));
-            playerCells.add(i, playerCell);
+            playerCells.add(playerCell);
         }
+    }
+
+    public void addPlayer(IPlayer player){
+        players.add(player);
     }
 
     public void updatePlayerPos() {
         for(int i=0; i<players.size(); i++){
+
             IPlayer player = players.get(i);
             Vector2 pos = player.getPos();
+            System.out.println("Drawing position of player "+player.getPlayerName()+" in position ("+pos.x+", "+pos.y+") facing "+player.getOrientation());
 
             switch (player.getOrientation()){
                 case NORTH:

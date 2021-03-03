@@ -34,6 +34,10 @@ public class CardTurn implements ICard{
                 '}';
     }
 
+    public int getTurnSteps() {
+        return turnSteps;
+    }
+
     /**
      * @return priority value of the card as an int
      */
