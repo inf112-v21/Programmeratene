@@ -9,7 +9,7 @@ public interface IBoard {
 
     public int getTileTextureSize();
 
-    void updatePlayerPos();
+    void drawPlayers();
 
     void clearPos(Vector2 pos);
 

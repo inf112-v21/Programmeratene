@@ -37,16 +37,15 @@ public interface IPlayer {
     Direction rotateRobot(int turnSteps);
 
     /**
-     *
      * @return Vector2 position of the player
      */
     Vector2 getPos();
 
     String getPlayerName();
 
-    public Direction getOrientation();
+    Direction getOrientation();
 
-    public ArrayList<ICard> getRegisters();
+    ArrayList<ICard> getRegisters();
 
-    public void setRegisters(ArrayList<ICard> cardsToAdd);
+    void setRegisters(ArrayList<ICard> cardsToAdd);
 }

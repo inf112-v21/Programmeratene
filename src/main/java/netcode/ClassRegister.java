@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ClassRegister {
 
     static void registerAll(Kryo k){
-        k.register(NetworkPackage.class);
+        k.register(CardListPacket.class);
         k.register(ArrayList.class);
         k.register(ICard.class);
         k.register(CardMove.class);

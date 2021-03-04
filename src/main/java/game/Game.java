@@ -2,8 +2,6 @@ package game;
 
 import board.Board;
 import board.IBoard;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import player.IPlayer;
 
 import java.util.ArrayList;

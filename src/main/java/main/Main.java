@@ -11,7 +11,6 @@ public class Main {
         cfg.setTitle("RoboRally");
         cfg.setWindowedMode(500, 500);
 
-
         new Lwjgl3Application(new GUI(), cfg);
     }
 }

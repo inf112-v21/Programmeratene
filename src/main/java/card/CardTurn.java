@@ -1,7 +1,5 @@
 package card;
 
-import game.Direction;
-
 import java.util.Objects;
 
 /**
@@ -22,20 +20,16 @@ public class CardTurn implements ICard{
     public CardTurn(){
     }
 
-    public void checkPriority() {
-        
-    }
-
     @Override
     public String toString() {
         if(turnSteps == -1){
-            return "Snu høyre " + "(" + priority + ")";
+            return "<Snu høyre " + "(" + priority + ")>";
         }
         else if(turnSteps == 1){
-            return "Snu høyre " + "(" + priority + ")";
+            return "<Snu høyre " + "(" + priority + ")>";
         }
         else if(turnSteps == 2){
-            return "Snu 180 " + "(" + priority + ")";
+            return "<Snu 180 " + "(" + priority + ")>";
         }
         else{
             return super.toString();
