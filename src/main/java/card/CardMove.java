@@ -24,16 +24,14 @@ public class CardMove implements ICard{
     @Override
     public String toString() {
         if(steps==-1){
-            return "Beveg " + steps + " bakover " + "(" + priority + ")";
+            return "<Beveg " + steps + " bakover " + "(" + priority + ")>";
         }
         else{
-            return "Beveg " + steps + " frem " + "(" + priority + ")";
+            return "<Beveg " + steps + " frem " + "(" + priority + ")>";
         }
     }
 
-    /**
-     * @return priority value of the card as an int
-     */
+
     @Override
     public int getPriority() {
         return priority;

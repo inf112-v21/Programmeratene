@@ -4,10 +4,10 @@ import card.ICard;
 
 import java.util.ArrayList;
 
-public class NetworkPackage {
+public class CardListPacket {
     ArrayList<ICard> cards;
 
-    public NetworkPackage() {
+    public CardListPacket() {
         this.cards = new ArrayList<>();
     }
 }

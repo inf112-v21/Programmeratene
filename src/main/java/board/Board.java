@@ -46,9 +46,8 @@ public class Board implements IBoard {
         players.add(player);
     }
 
-    public void updatePlayerPos() {
+    public void drawPlayers() {
         for(int i=0; i<players.size(); i++){
-
             IPlayer player = players.get(i);
             Vector2 pos = player.getPos();
             System.out.println("Drawing position of player "+player.getPlayerName()+" in position ("+pos.x+", "+pos.y+") facing "+player.getOrientation());

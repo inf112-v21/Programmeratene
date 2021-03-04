@@ -12,28 +12,27 @@ import java.util.Scanner;
 public class GameClient extends Listener {
     private static final int udpPort = 27960;
     private static final int tcpPort = 27960;
-    Client client;
+    Client kryoClient;
     Game game;
 
-    public GameClient() {
-        client = new Client();
-        ClassRegister.registerAll(client.getKryo());
-        client.start();
-        client.addListener(this);
+    public GameClient(boolean isHost) {
+        kryoClient = new Client();
+        ClassRegister.registerAll(kryoClient.getKryo());
+        kryoClient.start();
+        kryoClient.addListener(this);
 
         game = new Game();
-    }
-
-    public GameClient(boolean isHost) {
-        this();
-
         if(isHost)
             connectTo("localhost");
     }
 
+    public GameClient() {
+        this(false);
+    }
+
     public boolean connectTo(String ip){
         try {
-            client.connect(5000, ip, tcpPort, udpPort);
+            kryoClient.connect(5000, ip, tcpPort, udpPort);
             return true;
         }
         catch(Exception e) {
@@ -46,25 +45,25 @@ public class GameClient extends Listener {
     }
 
     public void received(Connection c, Object p) {
-        if(p instanceof NetworkPackage){
-            ArrayList<ICard> cards = ((NetworkPackage) p).cards;
-            System.out.println("Client received cards: " + cards.toString());
+        if(p instanceof CardListPacket){
+            ArrayList<ICard> playerHand = ((CardListPacket) p).cards;
+            System.out.println("Client received cards: " + playerHand.toString());
 
-            ArrayList<ICard> chosenCards = pick(cards);
+            ArrayList<ICard> chosenCards = pick(playerHand);
 
-            NetworkPackage testPacket = new NetworkPackage();
-            testPacket.cards = chosenCards;
-            c.sendTCP(testPacket);
+            CardListPacket chosenCardsPacket = new CardListPacket();
+            chosenCardsPacket.cards = chosenCards;
+            c.sendTCP(chosenCardsPacket);
         }
     }
 
-    public ArrayList pick(ArrayList<ICard> deck) {
+    public ArrayList<ICard> pick(ArrayList<ICard> deck) {
         ArrayList<ICard> list = new ArrayList<>();
         ArrayList<Integer> indices = new ArrayList<>();
-        Scanner myScanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         while (list.size() < 5) {
-            System.out.print("Program your robot: ");
-            Integer index = myScanner.nextInt();
+            System.out.print("Pick a card (1-9): ");
+            int index = sc.nextInt();
             if (indices.contains(index)) {
                 System.out.println("You have already picked this card");
 
@@ -74,9 +73,9 @@ public class GameClient extends Listener {
                 indices.add(index);
                 list.add(deck.get(index - 1));
             }
-            System.out.println(list);
         }
-        return (list);
+        System.out.println("Cards chosen: " + list);
+        return list;
     }
 
     public Game getGame() {
