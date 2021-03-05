@@ -1,7 +1,5 @@
 package card;
 
-import game.Direction;
-
 import java.util.Objects;
 
 /**
@@ -20,10 +18,6 @@ public class CardTurn implements ICard{
     }
 
     public CardTurn(){
-    }
-
-    public void checkPriority() {
-        
     }
 
     @Override
