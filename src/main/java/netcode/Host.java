@@ -34,6 +34,7 @@ public class Host extends Listener {
     //This is run when a connection is received
     public void connected(Connection c) {
         System.out.println("Received a connection from "+c.getRemoteAddressTCP().getHostString());
+        c.setTimeout(60000);
 
         IPlayer newPlayer = new HumanPlayer(c.getRemoteAddressTCP().getHostString());
         playerMap.put(c, newPlayer);

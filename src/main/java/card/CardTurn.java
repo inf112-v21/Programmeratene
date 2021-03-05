@@ -23,7 +23,7 @@ public class CardTurn implements ICard{
     @Override
     public String toString() {
         if(turnSteps == -1){
-            return "<Snu høyre " + "(" + priority + ")>";
+            return "<Snu venstre " + "(" + priority + ")>";
         }
         else if(turnSteps == 1){
             return "<Snu høyre " + "(" + priority + ")>";
