@@ -2,23 +2,29 @@
 ## Deloppgave 1: Prosjekt og prosjektstruktur
 - Rollene fungerer til nå slik som vi ønsker. Alle er tilfreds med sine roller og oppgaver.
 - Vi se ingen grunn til å legge til eller å fjerne roller.
-- Vi har sett at å delegere oppgaver tidligere er viktig. Da er det lettere for teamet å starte med eget arbeid. Dette ser vi på som "bedre planlegging".
+  * Tech Lead: Teknisk support for hele lag, en sentral rolle for å binde sammen prosjektet.
+  * Team Lead: Lagets "leder", han som holder mest orden på møtene og samarbeidsdelene.
+  * Project Manager: Tar ansvar for sentrale oppgaver som påvirker prosjektet.
+  * Product Owner: Skal holde orden på produktet, sjekke at spillet virker som det skal uten store feil.
+  * Subject Matter Expert: En ekspert innenfor spillet. Kjenner reglene og strukturen vesentlig bedre enn de andre.
+	
+- Alt i alt så har vi gjort gode valg, men har vi sett at å delegere oppgaver tidligere er viktig. Da er det lettere for teamet å starte med eget arbeid. Dette ser vi på som "bedre planlegging".
 - Gruppen har god dynamikk og alle bidrar med sitt.
-- Per nå bruker vi Discord og dette vungerer veldig bra. Her bruker vi både voice og tekst.
+- Per nå bruker vi Discord og dette vungerer veldig bra. Her bruker vi både voice og tekst, og møtes ofte. 
 - Ref Retrospective lengre nede.
 - Vi jobber mye sammen. Vi deler skjerm, og alle andre ser på / kommenterer og hjelper til. Derfor vil commitsene vise litt skjeivfordeling. Vi prøver å dele mest mulig likt slik at alle får bidra.
 - Referat ligger i egen folder */Meetings
-- Tre punkter vi må jobbe med fra Retrospective (ref lengre nede i dokumentet)
-  -- Tidligere utlevering av oppgaver til alle teamets medlemmer.
-  -- Virdere arbeidsmengde bedre. Ett medlem fikk ekstra arbeid da issuet var stort.
-  -- Flinkere på å fordele commints slik at alle får prøvd seg på Git. Dette selv om vi jobber mye sammen.
+- Tre punkter vi må jobbe med fra Retrospective (ref lengre nede i dokumentet):
+  * Tidligere utlevering av oppgaver til alle teamets medlemmer.
+  * Vurdere arbeidsmengde bedre. Ett medlem fikk ekstra arbeid da issuet var stort.
+  * Flinkere på å fordele commits slik at alle får prøvd seg på Git. Dette er selv om vi jobber mye sammen.
 
 ## Deloppgave 2 - Krav
 #### Info:
 Vi har valgt å beholde de samme brukerhistoriene fra oblig1 da de representerer alle de ni MVP kravene og det er de vi har jobbet ut i fra.
 #### Brukerhistorier:
 Brukerhistorienene er listet i prioritert rekkefølge
-- "Som bruker ønsker å se et spillbrett fordi dette er nødveldig for å kunne spille RoboRally"
+- "Som bruker ønsker jeg å se et spillbrett fordi dette er nødveldig for å kunne spille RoboRally"
 	- **Arbeidsoppgaver**
 		- Lage et spillbrett med Tiled
 		- Vise spillbrettet med libgdx i java
@@ -75,14 +81,20 @@ Vi har prioritert oppgaver basert på hva vi tror er nødveldig for videre utvik
 
 Vi har valgt å ikke endre noe i våre krav da vi ønsket å fylle hele MVPen som er utgitt. Måler var fra start å klare alle boksene før Oblig2 måtte leveres inn.
 
+
 ## Commits/git
-Commitsene er noe skjevt fordelt i første innlevering. Dette kommer av at vi har diskutert og
+Commitsene er noe skjevt fordelt i denne innleveringen. Dette kommer av at vi har diskutert og
 arbeidet mye sammen, mens en person skriver det vi kommer med. Vi har brukt en god del skjermdeling,
 samt også reviewet hverandres arbeid etterpå.
 
 ## Retrospective for Oblig 2
 - Vi er tilfreds med at alle medlemmer har stilt til samtlige timer. Totalt fikk vi inn et minimum fire timer i uken med møter. Viser til referatene våre.
-- Vi har effektive møter, der alle får bidratt og alle kommer med gode innspill og meninger
-- Kravene for obligen er dekket og vi har nådd målene vi satt oss. Dette gjelder også hele listen med MVP.
-- Teamet har jobbet godt sammen, men vi ser at det er nødveldig med bedre planlegging fra start av obligen. Det nevnes at vi skal dele ut oppgaver tidligere.
+- Vi har effektive møter, der alle får bidratt og alle kommer med gode innspill og meninger.
+- Teamet har jobbet godt sammen, men vi ser at det er nødvendig med bedre planlegging fra start av obligen. Det nevnes at vi skal dele ut oppgaver tidligere.
 - Denne gangen var det ekstra mye arbeid for Jan Erik siden han fikk oppgaven med å lage koblingen mellom Server og Klient. Denne oppgavene skulle vi delt på slik at det ble mindre arbeid på han.
+- Koden har blitt testet og funker på MacOS og Windows.
+- Produktleveranse:
+	*  MVP ble ikke helt oppfylt i denne gang. Client/host viste seg å være en større oppgave enn først antatt. Dette førte til at det ble mindre tid til å gjennomføre resten av MVP.
+	*  Foreløpig er det kun hosten av spillebrettet som får oppdatert nye posisjoner som følge av kortene. Det funker både å motta og sende kort fra host/client.
+	* Koden fra første oblig, som tar seg av win/loss condition, finnes ikke lenger. Dette er fordi nettverkskoden har skapt store endringer i hvordan spillebrettet blir implementert. Vi tror at dette blir enkelt å implementere, men vi hadde dessverre ikke tid til å implementere det før innlevering av oblig 2.
+	
