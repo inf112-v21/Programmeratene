@@ -61,6 +61,10 @@ public class GameClient extends Listener {
         ArrayList<ICard> list = new ArrayList<>();
         ArrayList<Integer> indices = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+
+        for(int i=1; i<=9; i++)
+            System.out.println(i+": "+deck.get(i-1));
+
         while (list.size() < 5) {
             System.out.print("Pick a card (1-9): ");
             int index = sc.nextInt();
