@@ -7,10 +7,7 @@ import com.esotericsoftware.kryonet.Server;
 import player.HumanPlayer;
 import player.IPlayer;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
+import java.util.*;
 
 public class Host extends Listener {
     private static final int udpPort = 27960;
@@ -20,7 +17,7 @@ public class Host extends Listener {
     GameClient gameClient;
 
     HashMap<Connection,IPlayer> playerMap;
-    int responsesReceived = 0;
+    int registersReceived = 0;
 
     public Host() throws Exception{
         System.out.println("Creating the server...");
@@ -37,26 +34,30 @@ public class Host extends Listener {
     //This is run when a connection is received
     public void connected(Connection c) {
         System.out.println("Received a connection from "+c.getRemoteAddressTCP().getHostString());
-        c.setTimeout(60000);
+        c.setTimeout(300000); //5 min
 
         IPlayer newPlayer = new HumanPlayer(c.getRemoteAddressTCP().getHostString());
         playerMap.put(c, newPlayer);
         gameClient.getGame().getBoard().addPlayer(newPlayer);
         gameClient.getGame().getBoard().drawPlayers();
 
-        dealCards();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Wait for more players? (y/n): ");
+        if (sc.nextLine().equals("n"))
+            dealCards();
     }
 
     //This is run when we receive a packet
     public void received(Connection c, Object p) {
-        responsesReceived++;
         if(p instanceof CardListPacket){
+            registersReceived++;
+
             ArrayList<ICard> cards = ((CardListPacket) p).cards;
             System.out.println("Host received cards: " + cards.toString());
 
             playerMap.get(c).setRegisters(cards);
 
-            if(responsesReceived >= playerMap.size())
+            if(registersReceived >= playerMap.size())
                 processRound();
         }
     }
@@ -66,7 +67,7 @@ public class Host extends Listener {
     }
 
     public void processRound() {
-        responsesReceived = 0;
+        registersReceived = 0;
         for(int i=0; i<5; i++) { //5 faser :)
             // <sort players by priority of card in registry[i]>
             ArrayList<IPlayer> players = new ArrayList<>(playerMap.values());
@@ -97,17 +98,23 @@ public class Host extends Listener {
                 e.printStackTrace();
             }
         }
+        dealCards();
     }
 
     public void dealCards(){
         ArrayList<ICard> gameDeck = new Deck().cards;
-        CardListPacket playerHandPacket = new CardListPacket();
-        for(int i = 0; i < 9; i++) {
-            playerHandPacket.cards.add(gameDeck.get(0));
-            gameDeck.remove(0);
+        for(Map.Entry<Connection, IPlayer> entry : playerMap.entrySet()) {
+            CardListPacket playerHandPacket = new CardListPacket();
+            for (int i = 0; i < 9; i++) {
+                playerHandPacket.cards.add(gameDeck.get(0));
+                gameDeck.remove(0);
+            }
+            entry.getKey().sendTCP(playerHandPacket);
         }
+    }
 
-        kryoServer.getConnections()[0].sendTCP(playerHandPacket);
+    public void sendPlayerData(ArrayList<IPlayer> playerData){
+
     }
 
     public GameClient getGameClient() {
