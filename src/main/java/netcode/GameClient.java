@@ -53,7 +53,7 @@ public class GameClient extends Listener {
 
             CardListPacket chosenCardsPacket = new CardListPacket();
             chosenCardsPacket.cards = chosenCards;
-            c.sendTCP(chosenCardsPacket);
+            kryoClient.sendTCP(chosenCardsPacket);
         }
     }
 

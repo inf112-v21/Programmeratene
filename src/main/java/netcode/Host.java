@@ -34,9 +34,9 @@ public class Host extends Listener {
     //This is run when a connection is received
     public void connected(Connection c) {
         System.out.println("Received a connection from "+c.getRemoteAddressTCP().getHostString());
-        c.setTimeout(300000); //5 min
+        c.setTimeout(0);
 
-        IPlayer newPlayer = new HumanPlayer(c.getRemoteAddressTCP().getHostString());
+        IPlayer newPlayer = new HumanPlayer("Player "+(playerMap.size()+1));
         playerMap.put(c, newPlayer);
         gameClient.getGame().getBoard().addPlayer(newPlayer);
         gameClient.getGame().getBoard().drawPlayers();
@@ -85,17 +85,10 @@ public class Host extends Listener {
                 gameClient.getGame().getBoard().drawPlayers();
 
                 try { //Delay for syns skyld
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
-
-
-            try { //Delay for syns skyld
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
         dealCards();
