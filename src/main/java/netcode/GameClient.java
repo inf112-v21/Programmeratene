@@ -7,6 +7,7 @@ import com.esotericsoftware.kryonet.Client;
 import game.Game;
 import netcode.packets.AddPlayerPacket;
 import netcode.packets.CardListPacket;
+import netcode.packets.PlayerDataPacket;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -59,6 +60,10 @@ public class GameClient extends Listener {
         }
         else if(p instanceof AddPlayerPacket){
             game.getBoard().addPlayer(((AddPlayerPacket) p).player);
+        }
+        else if(p instanceof PlayerDataPacket){
+            game.getBoard().setPlayers(((PlayerDataPacket) p).players);
+            game.getBoard().drawPlayers();
         }
     }
 

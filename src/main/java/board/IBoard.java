@@ -4,6 +4,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import player.IPlayer;
 
+import java.util.ArrayList;
+
 public interface IBoard {
     public TiledMap getTiledMap();
 
@@ -16,4 +18,6 @@ public interface IBoard {
     void clearAllPlayerPos();
 
     void addPlayer(IPlayer player);
+
+    void setPlayers(ArrayList<IPlayer> players);
 }

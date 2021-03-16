@@ -6,6 +6,7 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import netcode.packets.AddPlayerPacket;
 import netcode.packets.CardListPacket;
+import netcode.packets.PlayerDataPacket;
 import player.HumanPlayer;
 import player.IPlayer;
 
@@ -40,8 +41,6 @@ public class Host extends Listener {
 
         IPlayer newPlayer = new HumanPlayer("Player "+(playerMap.size()+1));
         playerMap.put(c, newPlayer);
-
-        //gameClient.getGame().getBoard().addPlayer(newPlayer);
 
         sendNewPlayerMessage(newPlayer); //Make alle clients add the new player
 
@@ -84,7 +83,9 @@ public class Host extends Listener {
                 else if (currentCard instanceof CardTurn)
                     player.rotateRobot(((CardTurn) currentCard).getTurnSteps());
 
-                gameClient.getGame().getBoard().drawPlayers();
+                //gameClient.getGame().getBoard().drawPlayers(); //OBSOLETE
+
+                sendPlayerData(); //Tell all clients to update board with new positions
 
                 try { //Delay for syns skyld
                     Thread.sleep(500);
@@ -110,13 +111,15 @@ public class Host extends Listener {
 
     public void sendNewPlayerMessage(IPlayer player) {
         AddPlayerPacket p = new AddPlayerPacket(player);
-        for(Connection c : playerMap.keySet()){
+        for(Connection c : playerMap.keySet())
             c.sendTCP(p);
-        }
     }
 
-    public void sendPlayerData(ArrayList<IPlayer> playerData){
-
+    public void sendPlayerData(){
+        PlayerDataPacket p = new PlayerDataPacket();
+        p.players.addAll(playerMap.values());
+        for(Connection c : playerMap.keySet())
+            c.sendTCP(p);
     }
 
     public GameClient getGameClient() {

@@ -23,6 +23,9 @@ public class Board implements IBoard {
     private TiledMap tiledMap;
     private HashMap<String, TiledMapTileLayer> layers;
     private ArrayList<Cell> playerCells;
+
+
+
     private ArrayList<IPlayer> players;
 
     public Board(){
@@ -52,7 +55,7 @@ public class Board implements IBoard {
         for(int i=0; i<players.size(); i++){
             IPlayer player = players.get(i);
             Vector2 pos = player.getPos();
-            System.out.println("Drawing position of player "+player.getPlayerName()+" in position ("+pos.x+", "+pos.y+") facing "+player.getOrientation());
+            //System.out.println("Drawing position of player "+player.getPlayerName()+" in position ("+pos.x+", "+pos.y+") facing "+player.getOrientation());
 
             switch (player.getOrientation()){
                 case NORTH:
@@ -89,5 +92,9 @@ public class Board implements IBoard {
 
     public int getTileTextureSize() {
         return tileTextureSize;
+    }
+
+    public void setPlayers(ArrayList<IPlayer> players) {
+        this.players = players;
     }
 }
