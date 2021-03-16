@@ -4,6 +4,7 @@ import card.CardMove;
 import card.CardTurn;
 import card.ICard;
 import com.esotericsoftware.kryo.Kryo;
+import netcode.packets.CardListPacket;
 
 import java.util.ArrayList;
 
