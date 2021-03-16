@@ -13,5 +13,7 @@ public interface IBoard {
 
     void clearPos(Vector2 pos);
 
+    void clearAllPlayerPos();
+
     void addPlayer(IPlayer player);
 }

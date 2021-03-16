@@ -47,6 +47,7 @@ public class Board implements IBoard {
     }
 
     public void drawPlayers() {
+        clearAllPlayerPos();
         for(int i=0; i<players.size(); i++){
             IPlayer player = players.get(i);
             Vector2 pos = player.getPos();
@@ -72,6 +73,13 @@ public class Board implements IBoard {
 
     public void clearPos(Vector2 pos){
         layers.get("Player").setCell((int) pos.x, (int) pos.y, new Cell());
+    }
+
+    public void clearAllPlayerPos() {
+        Cell emptyCell = new Cell();
+        for(int y=0; y<BOARD_HEIGHT; y++)
+            for(int x=0; x<BOARD_WIDTH; x++)
+                layers.get("Player").setCell(x, y, emptyCell);
     }
 
     public TiledMap getTiledMap() {

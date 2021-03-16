@@ -31,6 +31,10 @@ public class CardMove implements ICard{
         }
     }
 
+    @Override
+    public int compareTo(ICard iCard) {
+        return iCard.getPriority() - getPriority();
+    }
 
     @Override
     public int getPriority() {

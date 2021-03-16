@@ -60,4 +60,9 @@ public class CardTurn implements ICard{
     public int hashCode() {
         return Objects.hash(turnSteps, priority);
     }
+
+    @Override
+    public int compareTo(ICard iCard) {
+        return iCard.getPriority() - getPriority();
+    }
 }
