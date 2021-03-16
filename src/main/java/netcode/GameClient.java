@@ -5,6 +5,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Client;
 import game.Game;
+import netcode.packets.AddPlayerPacket;
 import netcode.packets.CardListPacket;
 
 import java.util.ArrayList;
@@ -55,6 +56,9 @@ public class GameClient extends Listener {
             CardListPacket chosenCardsPacket = new CardListPacket();
             chosenCardsPacket.cards = chosenCards;
             kryoClient.sendTCP(chosenCardsPacket);
+        }
+        else if(p instanceof AddPlayerPacket){
+            game.getBoard().addPlayer(((AddPlayerPacket) p).player);
         }
     }
 

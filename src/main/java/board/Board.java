@@ -44,6 +44,7 @@ public class Board implements IBoard {
 
     public void addPlayer(IPlayer player){
         players.add(player);
+        drawPlayers();
     }
 
     public void drawPlayers() {

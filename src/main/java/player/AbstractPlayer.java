@@ -16,6 +16,10 @@ public abstract class AbstractPlayer implements IPlayer {
     Direction orientation;
     Vector2 playerPos;
 
+    AbstractPlayer(){
+
+    }
+
     AbstractPlayer(String playerName){
         this.playerName = playerName;
         this.deck = new ArrayList<>();
