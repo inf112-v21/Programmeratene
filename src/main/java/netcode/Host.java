@@ -74,8 +74,6 @@ public class Host extends Listener {
             int finalI = i;
             Collections.sort(players, (o1, o2) -> o1.getRegisters().get(finalI).compareTo(o2.getRegisters().get(finalI)));
             for (IPlayer player : players) {
-                gameClient.getGame().getBoard().clearPos(player.getPos());
-
                 ICard currentCard = player.getRegisters().get(i);
                 if (currentCard instanceof CardMove)
                     player.moveRobot(((CardMove) currentCard).getSteps());
