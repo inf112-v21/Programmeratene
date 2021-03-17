@@ -89,10 +89,7 @@ public class GUI implements ApplicationListener {
 
     public void startAsClient(String ip){
         gameClient = new GameClient();
-        if(gameClient.connectTo(ip)){
-            //connection success
-        }
-        else {
+        if(!gameClient.connectTo(ip)){
             Scanner sc = new Scanner(System.in);
             System.out.print("Connection failed, Ctrl+C to exit or re-enter IP: ");
             startAsClient(sc.nextLine());
