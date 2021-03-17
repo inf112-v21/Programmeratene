@@ -1,11 +1,11 @@
-package netcode;
+package netcode.packets;
 
 import card.ICard;
 
 import java.util.ArrayList;
 
 public class CardListPacket {
-    ArrayList<ICard> cards;
+    public ArrayList<ICard> cards;
 
     public CardListPacket() {
         this.cards = new ArrayList<>();
