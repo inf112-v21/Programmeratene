@@ -31,14 +31,22 @@ public abstract class AbstractPlayer implements IPlayer {
         this.playerPos = new Vector2(0,0);
     }
 
+
     @Override
     public void applyDamage(int damageTaken) {
-        //TODO
+        damageTokens = damageTokens + damageTaken;
+        if(damageTokens >= 9) {
+            lifeTokens--;
+            damageTokens = 0;
+        }
     }
 
     @Override
     public void repair(int repairAmount) {
-        //TODO
+        damageTokens = damageTokens - repairAmount;
+        if(damageTokens < 0) {
+            damageTokens = 0;
+        }
     }
 
     public void moveRobot(int steps) {
