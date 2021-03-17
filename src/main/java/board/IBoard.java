@@ -7,9 +7,9 @@ import player.IPlayer;
 import java.util.ArrayList;
 
 public interface IBoard {
-    public TiledMap getTiledMap();
+    TiledMap getTiledMap();
 
-    public int getTileTextureSize();
+    int getTileTextureSize();
 
     void drawPlayers();
 

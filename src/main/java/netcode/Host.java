@@ -15,7 +15,7 @@ import java.util.*;
 public class Host extends Listener {
     private static final int udpPort = 27960;
     private static final int tcpPort = 27960;
-    Server kryoServer;
+    final Server kryoServer;
 
     GameClient gameClient;
 
@@ -75,7 +75,7 @@ public class Host extends Listener {
             // <sort players by priority of card in registry[i]>
             ArrayList<IPlayer> players = new ArrayList<>(playerMap.values());
             int finalI = i;
-            Collections.sort(players, (o1, o2) -> o1.getRegisters().get(finalI).compareTo(o2.getRegisters().get(finalI)));
+            players.sort((o1, o2) -> o1.getRegisters().get(finalI).compareTo(o2.getRegisters().get(finalI)));
             for (IPlayer player : players) {
                 ICard currentCard = player.getRegisters().get(i);
                 if (currentCard instanceof CardMove)

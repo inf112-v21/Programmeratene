@@ -15,8 +15,8 @@ import java.util.Scanner;
 public class GameClient extends Listener {
     private static final int udpPort = 27960;
     private static final int tcpPort = 27960;
-    Client kryoClient;
-    Game game;
+    final Client kryoClient;
+    final Game game;
 
     public GameClient(boolean isHost) {
         kryoClient = new Client();

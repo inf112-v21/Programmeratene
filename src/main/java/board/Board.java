@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Board implements IBoard {
-    private static String[] layerNames = {"Board","Hole","Flag","Player"};
-    private static String[] robotTextureNames = {"RobotRed", "RobotBlue", "RobotGreen", "RobotYellow", "RobotCyan", "RobotOrange", "RobotPink", "RobotPurple"};
-    private int BOARD_WIDTH = 5;
-    private int BOARD_HEIGHT = 5;
+    private static final String[] layerNames = {"Board","Hole","Flag","Player"};
+    private static final String[] robotTextureNames = {"RobotRed", "RobotBlue", "RobotGreen", "RobotYellow", "RobotCyan", "RobotOrange", "RobotPink", "RobotPurple"};
+    private final int BOARD_WIDTH = 5;
+    private final int BOARD_HEIGHT = 5;
 
-    private int tileTextureSize = 300; //Size of tile-textures in pixels (From Tiled-editor)
-    private TiledMap tiledMap;
-    private HashMap<String, TiledMapTileLayer> layers;
-    private ArrayList<Cell> playerCells;
+    private final int tileTextureSize = 300; //Size of tile-textures in pixels (From Tiled-editor)
+    private final TiledMap tiledMap;
+    private final HashMap<String, TiledMapTileLayer> layers;
+    private final ArrayList<Cell> playerCells;
 
 
 
