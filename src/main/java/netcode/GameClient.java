@@ -50,7 +50,7 @@ public class GameClient extends Listener {
     public void received(Connection c, Object p) {
         if(p instanceof CardListPacket){
             ArrayList<ICard> playerHand = ((CardListPacket) p).cards;
-            System.out.println("Client received cards: " + playerHand.toString());
+            System.out.println("══════════════════\n═ CARDS RECEIVED ═\n══════════════════");
 
             ArrayList<ICard> chosenCards = pick(playerHand);
 
