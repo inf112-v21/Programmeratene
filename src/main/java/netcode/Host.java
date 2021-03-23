@@ -105,7 +105,6 @@ public class Host extends Listener {
         switch (standingOn){
             case "flag":
                 sendPlayerWonMessage(player);
-                System.exit(0);
             case "hole":
                 player.applyDamage(9);
                 player.setPos(new Vector2(0,0));
@@ -128,7 +127,7 @@ public class Host extends Listener {
     }
 
     public void sendPlayerWonMessage(IPlayer player){
-        PlayerWonPacket p = new PlayerWonPacket();
+        PlayerWonPacket p = new PlayerWonPacket(player);
         for(Connection c : playerMap.keySet())
             c.sendTCP(p);
     }
