@@ -9,6 +9,7 @@ import game.Direction;
 import netcode.packets.AddPlayerPacket;
 import netcode.packets.CardListPacket;
 import netcode.packets.PlayerDataPacket;
+import netcode.packets.PlayerWonPacket;
 import player.HumanPlayer;
 import player.IPlayer;
 
@@ -103,7 +104,8 @@ public class Host extends Listener {
         String standingOn = gameClient.getGame().getBoard().getElementInPos(player.getPos());
         switch (standingOn){
             case "flag":
-                System.out.println(player.getPlayerName() + " won!");
+                sendPlayerWonMessage(player);
+                System.exit(0);
             case "hole":
                 player.applyDamage(9);
                 player.setPos(new Vector2(0,0));
@@ -123,6 +125,12 @@ public class Host extends Listener {
             }
             entry.getKey().sendTCP(playerHandPacket);
         }
+    }
+
+    public void sendPlayerWonMessage(IPlayer player){
+        PlayerWonPacket p = new PlayerWonPacket();
+        for(Connection c : playerMap.keySet())
+            c.sendTCP(p);
     }
 
     public void sendNewPlayerMessage(IPlayer player) {

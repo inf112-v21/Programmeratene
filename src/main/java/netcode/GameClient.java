@@ -8,6 +8,8 @@ import game.Game;
 import netcode.packets.AddPlayerPacket;
 import netcode.packets.CardListPacket;
 import netcode.packets.PlayerDataPacket;
+import netcode.packets.PlayerWonPacket;
+import player.IPlayer;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -64,6 +66,11 @@ public class GameClient extends Listener {
         else if(p instanceof PlayerDataPacket){
             game.getBoard().setPlayers(((PlayerDataPacket) p).players);
             game.getBoard().drawPlayers();
+        }
+        else if(p instanceof PlayerWonPacket){
+            IPlayer player = ((PlayerWonPacket) p).player;
+            System.out.println(player.getPlayerName() + " won!");
+            System.exit(0);
         }
     }
 
