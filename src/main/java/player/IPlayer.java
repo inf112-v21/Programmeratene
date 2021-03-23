@@ -36,6 +36,10 @@ public interface IPlayer {
      */
     Direction rotateRobot(int turnSteps);
 
+    void setPos(Vector2 pos);
+
+    void setOrientation(Direction dir);
+
     /**
      * @return Vector2 position of the player
      */

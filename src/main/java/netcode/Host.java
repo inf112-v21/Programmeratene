@@ -1,9 +1,11 @@
 package netcode;
 
 import card.*;
+import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
+import game.Direction;
 import netcode.packets.AddPlayerPacket;
 import netcode.packets.CardListPacket;
 import netcode.packets.PlayerDataPacket;
@@ -83,7 +85,7 @@ public class Host extends Listener {
                 else if (currentCard instanceof CardTurn)
                     player.rotateRobot(((CardTurn) currentCard).getTurnSteps());
 
-                //gameClient.getGame().getBoard().drawPlayers(); //OBSOLETE
+                positionCheck(player);
 
                 sendPlayerData(); //Tell all clients to update board with new positions
 
@@ -95,6 +97,20 @@ public class Host extends Listener {
             }
         }
         dealCards();
+    }
+
+    public void positionCheck(IPlayer player){
+        String standingOn = gameClient.getGame().getBoard().getElementInPos(player.getPos());
+        switch (standingOn){
+            case "flag":
+                System.out.println(player.getPlayerName() + " won!");
+            case "hole":
+                player.applyDamage(9);
+                player.setPos(new Vector2(0,0));
+                player.setOrientation(Direction.NORTH);
+            default:
+                //something
+        }
     }
 
     public void dealCards(){

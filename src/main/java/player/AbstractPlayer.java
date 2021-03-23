@@ -96,8 +96,18 @@ public abstract class AbstractPlayer implements IPlayer {
     }
 
     @Override
+    public void setPos(Vector2 pos) {
+        this.playerPos = pos;
+    }
+
+    @Override
     public Vector2 getPos() {
         return playerPos;
+    }
+
+    @Override
+    public void setOrientation(Direction dir) {
+        this.orientation = dir;
     }
 
     @Override
