@@ -1,5 +1,6 @@
 package board;
 
+import board.boardelements.IBoardElement;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
@@ -90,6 +91,15 @@ public class Board implements IBoard {
         for(int y=0; y<BOARD_HEIGHT; y++)
             for(int x=0; x<BOARD_WIDTH; x++)
                 layers.get("Player").setCell(x, y, emptyCell);
+    }
+
+    public String getElementInPos(Vector2 pos){
+        if(layers.get("Flag").getCell((int) pos.x, (int) pos.y) != null)
+            return "flag";
+        else if(layers.get("Hole").getCell((int) pos.x, (int) pos.y) != null)
+            return "hole";
+
+        return "floortile";
     }
 
     public TiledMap getTiledMap() {

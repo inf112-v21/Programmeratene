@@ -20,4 +20,6 @@ public interface IBoard {
     void addPlayer(IPlayer player);
 
     void setPlayers(ArrayList<IPlayer> players);
+
+     String getElementInPos(Vector2 pos);
 }
