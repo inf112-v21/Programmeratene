@@ -1,3 +1,5 @@
+![alt text](https://raw.githubusercontent.com/inf112-v21/Programmeratene/109-redesign-logo/assets/other/logo_programmeratene.png)
+
 # INF112 Gruppe 10 - Lag 4 Programmeratene
 RoboRally spill med libgdx <br/>
 
