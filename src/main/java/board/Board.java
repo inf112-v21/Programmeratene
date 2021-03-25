@@ -3,6 +3,7 @@ package board;
 import board.boardelements.IBoardElement;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -16,7 +17,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Board implements IBoard {
-    private static final String[] layerNames = {"Board","Hole","Flag","Player"};
     private static final String[] robotTextureNames = {"RobotRed", "RobotBlue", "RobotGreen", "RobotYellow", "RobotCyan", "RobotOrange", "RobotPink", "RobotPurple"};
     private final int BOARD_WIDTH;
     private final int BOARD_HEIGHT;
@@ -32,15 +32,15 @@ public class Board implements IBoard {
 
     public Board(){
         // Set up TiledMap with layers
-        tiledMap = new TmxMapLoader().load("example.tmx");
+        tiledMap = new TmxMapLoader().load("Corners.tmx");
         MapProperties prop = tiledMap.getProperties();
         BOARD_WIDTH = prop.get("width", Integer.class);
         BOARD_HEIGHT = prop.get("height", Integer.class);
         tileTextureSize = prop.get("tilewidth", Integer.class); //note: tilewidth and tileheight should be the same
 
         layers = new HashMap<>();
-        for (String layerName : layerNames)
-            layers.put(layerName, (TiledMapTileLayer) tiledMap.getLayers().get(layerName));
+        for (MapLayer layer : tiledMap.getLayers())
+            layers.put(layer.getName(), (TiledMapTileLayer) layer);
 
         this.players = new ArrayList<>();
         playerCells = new ArrayList<>();
