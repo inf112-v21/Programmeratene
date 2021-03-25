@@ -23,7 +23,7 @@ RoboRally spill med libgdx <br/>
 1. See "How to run game"
 2. Choose between Host or Player
 3. If Host, wait for Clients to connect / If Client, enter Host IP to connect to Host 
-   3.1 If there are more than 2 players, host type "y" 
+   3.1 If there are more than 2 players, host types "y" 
    3.2 When everyone has connected, host types "n"
 4. Pick cards from the terminal with card numbers 1-9
 5. Pick your cards in preferred order, afterwards the robots will move in order after card priority (the highest first)
