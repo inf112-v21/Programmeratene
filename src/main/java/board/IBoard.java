@@ -38,10 +38,16 @@ public interface IBoard {
     void setPlayers(ArrayList<IPlayer> players);
 
 
+
     /*
         GETTERS
      */
     TiledMap getTiledMap();
 
     int getTileTextureSize();
+
+
+     int getBOARD_WIDTH();
+     int getBOARD_HEIGHT();
+
 }
