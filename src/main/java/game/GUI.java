@@ -44,7 +44,7 @@ public class GUI implements ApplicationListener {
 
         // Set up Camera and Renderer
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 14, 16);
+        camera.setToOrtho(false, gameClient.getGame().getBoard().getBOARD_WIDTH(),gameClient.getGame().getBoard().getBOARD_HEIGHT());
         camera.update();
         renderer = new OrthogonalTiledMapRenderer(gameClient.getGame().getBoard().getTiledMap(), (1f/gameClient.getGame().getBoard().getTileTextureSize()));
         renderer.setView(camera);

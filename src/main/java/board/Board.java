@@ -18,8 +18,8 @@ import java.util.HashMap;
 
 public class Board implements IBoard {
     private static final String[] robotTextureNames = {"RobotRed", "RobotBlue", "RobotGreen", "RobotYellow", "RobotCyan", "RobotOrange", "RobotPink", "RobotPurple"};
-    private final int BOARD_WIDTH;
-    private final int BOARD_HEIGHT;
+    public final int BOARD_WIDTH;
+    public final int BOARD_HEIGHT;
 
     private final int tileTextureSize; //Size of tile-textures in pixels (From Tiled-editor)
     private final TiledMap tiledMap;
@@ -112,5 +112,13 @@ public class Board implements IBoard {
 
     public void setPlayers(ArrayList<IPlayer> players) {
         this.players = players;
+    }
+
+    public int getBOARD_WIDTH() {
+        return BOARD_WIDTH;
+    }
+
+    public int getBOARD_HEIGHT() {
+        return BOARD_HEIGHT;
     }
 }
