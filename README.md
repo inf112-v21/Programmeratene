@@ -20,7 +20,7 @@ RoboRally spill med libgdx <br/>
 1. See "How to run game"
 2. Choose between Host or Player
 3. If Host, wait for Clients to connect / If Client, enter IP to connect to Host
-3. When everyone has successfully connected, you can pick cards from the terminal with card numbers 1-8
+3. When everyone has successfully connected, you can pick cards from the terminal with card numbers 1-9
 4. Pick your cards in wished order, afterwards the robots will move in order after card priority (the highest first)
 5. After every robot has done all movements for that round, we get a new round with new cards   
 6. Go to the flag first to win, but be aware of holes and other obstacles!
