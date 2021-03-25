@@ -1,7 +1,9 @@
 package board;
 
+import board.boardelements.IBoardElement;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -15,10 +17,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Board implements IBoard {
-    private static final String[] layerNames = {"Board","Hole","Flag","Player"};
     private static final String[] robotTextureNames = {"RobotRed", "RobotBlue", "RobotGreen", "RobotYellow", "RobotCyan", "RobotOrange", "RobotPink", "RobotPurple"};
-    private final int BOARD_WIDTH;
-    private final int BOARD_HEIGHT;
+    public final int BOARD_WIDTH;
+    public final int BOARD_HEIGHT;
 
     private final int tileTextureSize; //Size of tile-textures in pixels (From Tiled-editor)
     private final TiledMap tiledMap;
@@ -31,15 +32,15 @@ public class Board implements IBoard {
 
     public Board(){
         // Set up TiledMap with layers
-        tiledMap = new TmxMapLoader().load("example.tmx");
+        tiledMap = new TmxMapLoader().load("Corners.tmx");
         MapProperties prop = tiledMap.getProperties();
         BOARD_WIDTH = prop.get("width", Integer.class);
         BOARD_HEIGHT = prop.get("height", Integer.class);
         tileTextureSize = prop.get("tilewidth", Integer.class); //note: tilewidth and tileheight should be the same
 
         layers = new HashMap<>();
-        for (String layerName : layerNames)
-            layers.put(layerName, (TiledMapTileLayer) tiledMap.getLayers().get(layerName));
+        for (MapLayer layer : tiledMap.getLayers())
+            layers.put(layer.getName(), (TiledMapTileLayer) layer);
 
         this.players = new ArrayList<>();
         playerCells = new ArrayList<>();
@@ -92,6 +93,15 @@ public class Board implements IBoard {
                 layers.get("Player").setCell(x, y, emptyCell);
     }
 
+    public String getElementInPos(Vector2 pos){
+        if(layers.get("Flag").getCell((int) pos.x, (int) pos.y) != null)
+            return "flag";
+        else if(layers.get("Hole").getCell((int) pos.x, (int) pos.y) != null)
+            return "hole";
+
+        return "floortile";
+    }
+
     public TiledMap getTiledMap() {
         return tiledMap;
     }
@@ -102,5 +112,13 @@ public class Board implements IBoard {
 
     public void setPlayers(ArrayList<IPlayer> players) {
         this.players = players;
+    }
+
+    public int getBOARD_WIDTH() {
+        return BOARD_WIDTH;
+    }
+
+    public int getBOARD_HEIGHT() {
+        return BOARD_HEIGHT;
     }
 }

@@ -20,11 +20,6 @@ public interface IPlayer {
     void repair(int repairAmount);
 
     /**
-     * Clear non-locked registers
-     */
-    void clearRegisters();
-
-    /**
      * Moves the robot
      */
     void moveRobot(int steps);
@@ -36,8 +31,17 @@ public interface IPlayer {
      */
     Direction rotateRobot(int turnSteps);
 
-    /**
-     * @return Vector2 position of the player
+    /*
+        SETTERS
+     */
+    void setPos(Vector2 pos);
+
+    void setOrientation(Direction dir);
+
+    void setRegisters(ArrayList<ICard> cardsToAdd);
+
+    /*
+        GETTERS
      */
     Vector2 getPos();
 
@@ -46,6 +50,4 @@ public interface IPlayer {
     Direction getOrientation();
 
     ArrayList<ICard> getRegisters();
-
-    void setRegisters(ArrayList<ICard> cardsToAdd);
 }

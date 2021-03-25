@@ -1,5 +1,7 @@
+![alt text](https://raw.githubusercontent.com/inf112-v21/Programmeratene/master/assets/other/logo_programmeratene_inf112v21.png)
+
 # INF112 Gruppe 10 - Lag 4 Programmeratene
-RoboRally spill med libgdx <br/>
+Uni project where we have to make a RoboRally game with libgdx. This game supports up to 8 players on a client / host based system. We use Kryonet for all our multiplayer features. Read more about Kryonet [here](https://github.com/EsotericSoftware/kryonet) <br/>
 
 
 [![Build Status](https://travis-ci.com/inf112-v21/Programmeratene.svg?branch=master)](https://travis-ci.com/inf112-v21/Programmeratene)
@@ -11,7 +13,7 @@ RoboRally spill med libgdx <br/>
 - Simen Sørensen (sisorensen) - PRODUCT OWNER
 - Erland Myklebust (emy004) - SUBJECT MATTER EXPERT
 
-##Requirements
+## Requirements
 - Java (tested on jdk 13 and 15)
 
 ## How to run game
@@ -19,7 +21,7 @@ RoboRally spill med libgdx <br/>
 2. Open repository in your IDE as a Maven project
 3. Run Main.main()
 
-##How to play
+## How to play
 1. See "How to run game"
 2. Choose between Host or Player
 3. If Host, wait for Clients to connect / If Client, enter Host IP to connect to Host 
@@ -35,9 +37,13 @@ RoboRally spill med libgdx <br/>
 2. Open repository in your IDE as a Maven project
 3. Run directly from test folder
 
+
 ## How to run manual tests
 1. Open Project folder. 
 2. Open Documents folder
 3. Open Manuelle Tester folder
 4. Open ManuelleTester.pdf
 5. Follow the instructions for each test.
+
+## Rules
+Read more about how to play RoboRally [here](https://www.fgbradleys.com/rules/rules4/Robo%20Rally%20-%20rules.pdf)

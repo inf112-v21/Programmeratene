@@ -9,6 +9,7 @@ import game.Direction;
 import netcode.packets.AddPlayerPacket;
 import netcode.packets.CardListPacket;
 import netcode.packets.PlayerDataPacket;
+import netcode.packets.PlayerWonPacket;
 import player.HumanPlayer;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class ClassRegister {
         k.register(CardListPacket.class);
         k.register(AddPlayerPacket.class);
         k.register(PlayerDataPacket.class);
+        k.register(PlayerWonPacket.class);
 
         k.register(ArrayList.class);
         k.register(ICard.class);
