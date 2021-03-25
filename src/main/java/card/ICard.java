@@ -1,11 +1,16 @@
 package card;
 
 public interface ICard {
+
     /**
-     *
-     * @return priority value of the card as an int
+     * Override Object.compareTo so that cards are compared with respects to priority
+     * @param iCard
+     * @return
+     */
+    int compareTo(ICard iCard);
+
+    /*
+        GETTERS
      */
     int getPriority();
-
-    int compareTo(ICard iCard);
 }
