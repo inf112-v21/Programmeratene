@@ -117,6 +117,9 @@ public class Host extends Listener {
     public void dealCards(){
         ArrayList<ICard> gameDeck = new Deck().cards;
         for(Map.Entry<Connection, IPlayer> entry : playerMap.entrySet()) {
+            if( !entry.getValue().getAlive()) {
+                continue;
+            }
             CardListPacket playerHandPacket = new CardListPacket();
             for (int i = 0; i < 9; i++) {
                 playerHandPacket.cards.add(gameDeck.get(0));
