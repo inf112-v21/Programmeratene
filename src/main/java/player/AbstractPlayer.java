@@ -91,11 +91,6 @@ public abstract class AbstractPlayer implements IPlayer {
     }
 
     @Override
-    public void clearRegisters() {
-        //TODO
-    }
-
-    @Override
     public void setPos(Vector2 pos) {
         this.playerPos = pos;
     }
