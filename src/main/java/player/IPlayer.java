@@ -34,7 +34,6 @@ public interface IPlayer {
     /*
         SETTERS
      */
-
     void setPos(Vector2 pos);
 
     void setOrientation(Direction dir);
