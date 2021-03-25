@@ -37,7 +37,7 @@ public interface IBoard {
      */
     void setPlayers(ArrayList<IPlayer> players);
 
-    
+
     /*
         GETTERS
      */
