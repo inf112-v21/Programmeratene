@@ -83,5 +83,5 @@ Brukerhistorienene er listet i prioritert rekkefølge
 - Multiplayer har vært en stor oppgave å få til, så å vise roboter samt få dem til å flytte seg i clients er vi veldg fornøyde med.
 - Vi ser at det har vært en positiv forbedring å delegere oppgaver tidligere i prosessen, slik at vi har bedre og mer effektiv tid til å gjennomføre målet vi har satt oss.
 - Til neste oblig bør vi fokusere mer på jevne commits og jevn arbeidsfordeling. 
-- Nå som vi er ferdig med MVP, kan vi fokusere på mer brukervennlig GUI. Til nå er spillet spilt i terminalen, men vi ønsker å ha en mer interaktiv GUI hvor spiller kan velge kort.  
-- Vi må også implementere brettelementer.
+- Nå som vi er ferdig med MVP, kan vi fokusere på mer brukervennlig GUI. Til nå er spillet spilt i terminalen. Men til neste gang ønsker vi å gjøre det mulig for spilleren å interagere med spillet helt gjennom GUI. Dette vil være med å velge kort, se healthtokens og lignende.  
+- Vi ønsker å implementere alle brettelementene fra spillet. Dette er noe vi kommer til å se på første møte, og legge en slagplan på hvordan vi skal takle dette fremover.
