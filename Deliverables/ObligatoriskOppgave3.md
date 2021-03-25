@@ -72,7 +72,7 @@ Brukerhistorienene er listet i prioritert rekkefølge
 		- Når en spiller legger et kort, beveger roboten seg med henhold til egenskapene til kortet som ble lagt
 	
 ###Deloppgave 3
-Se README.md om kjøring av spillet
+- Se README.md om kjøring av spillet og tester
 
 ## Retrospective for Oblig 3
 - I denne obligen har vi fokusert på å gjøre ferdig MVP, derav:
