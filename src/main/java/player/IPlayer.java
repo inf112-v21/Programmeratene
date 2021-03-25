@@ -20,6 +20,11 @@ public interface IPlayer {
     void repair(int repairAmount);
 
     /**
+     * Return players alive status (bool)
+     */
+    boolean getAlive();
+
+    /**
      * Moves the robot
      */
     void moveRobot(int steps);
