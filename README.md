@@ -1,7 +1,7 @@
 ![alt text](https://raw.githubusercontent.com/inf112-v21/Programmeratene/master/assets/other/logo_programmeratene_inf112v21.png)
 
 # INF112 Gruppe 10 - Lag 4 Programmeratene
-Uni project where we have to make a RoboRally game with libgdx. This game supports up to 8 players on a client / host based system. We use Kryonet for all our multipayer features. Read more about Kryonet [here](https://github.com/EsotericSoftware/kryonet) <br/>
+Uni project where we have to make a RoboRally game with libgdx. This game supports up to 8 players on a client / host based system. We use Kryonet for all our multiplayer features. Read more about Kryonet [here](https://github.com/EsotericSoftware/kryonet) <br/>
 
 
 [![Build Status](https://travis-ci.com/inf112-v21/Programmeratene.svg?branch=master)](https://travis-ci.com/inf112-v21/Programmeratene)
