@@ -70,7 +70,13 @@ Brukerhistorienene er listet i prioritert rekkefølge
 		- Implementere grafikk som viser at robot har blitt flyttet
 	- **Akseptansekrav**
 		- Når en spiller legger et kort, beveger roboten seg med henhold til egenskapene til kortet som ble lagt
-	
+
+- Kjente bugs
+	- Når en spiller mister alle 3 lifetokens, mister den muligheten til å velge kort. Dette fører til at hosten venter på en packet som aldri kommer og spillet "crasher".
+	- Per dags dato, så kan roboten bevege seg utenfor banen. Dette er fordi det ikke er implementert noen logikk for å stoppe dette.
+	- Ikke implentert logikk for besøk av flere flagg. Dette medfører til at en spiller vinner ved å treffe et vilkårlig flagg.
+
+
 ###Deloppgave 3
 - Se README.md om kjøring av spillet og tester
 
