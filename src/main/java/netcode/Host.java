@@ -109,6 +109,8 @@ public class Host extends Listener {
         switch (standingOn){
             case "flag":
                 sendPlayerWonMessage(player);
+                gameClient.kryoClient.stop();
+                kryoServer.stop();
             case "hole":
                 player.applyDamage(9);
                 player.setOrientation(Direction.NORTH);
