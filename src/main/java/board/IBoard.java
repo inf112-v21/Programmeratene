@@ -2,6 +2,7 @@ package board;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
+import game.Direction;
 import player.IPlayer;
 
 import java.util.ArrayList;
@@ -52,4 +53,5 @@ public interface IBoard {
      int getBOARD_WIDTH();
      int getBOARD_HEIGHT();
 
+    boolean canMove(Vector2 pos, Direction orientation);
 }

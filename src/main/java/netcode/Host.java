@@ -1,5 +1,6 @@
 package netcode;
 
+import board.Board;
 import card.*;
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Connection;
@@ -73,6 +74,7 @@ public class Host extends Listener {
     public void disconnected(Connection c) {
     }
 
+
     public void processRound() {
         registersReceived = 0;
         for(int i=0; i<5; i++) { //5 faser :)
@@ -82,8 +84,14 @@ public class Host extends Listener {
             players.sort((o1, o2) -> o1.getRegisters().get(finalI).compareTo(o2.getRegisters().get(finalI)));
             for (IPlayer player : players.stream().filter(IPlayer::getAlive).collect(Collectors.toList())) {
                 ICard currentCard = player.getRegisters().get(i);
-                if (currentCard instanceof CardMove)
-                    player.moveRobot(((CardMove) currentCard).getSteps());
+                if (currentCard instanceof CardMove) {
+                    for (int j = 0; j < ((CardMove) currentCard).getSteps(); j++) {
+                        if (gameClient.game.getBoard().canMove(player.getPos(), player.getOrientation())) {
+                            player.moveRobot(1);
+                        }
+                    }
+                }
+
                 else if (currentCard instanceof CardTurn)
                     player.rotateRobot(((CardTurn) currentCard).getTurnSteps());
 
@@ -115,6 +123,7 @@ public class Host extends Listener {
             case "hole":
                 player.applyDamage(9);
                 player.setOrientation(Direction.NORTH);
+
             default:
                 //something
         }

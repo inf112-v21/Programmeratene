@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
+import game.Direction;
 import player.IPlayer;
 
 import java.util.ArrayList;
@@ -50,6 +51,26 @@ public class Board implements IBoard {
             playerCell.setTile(new StaticTiledMapTile(new TextureRegion(new Texture("robots/"+robotTextureNames[i]+".png"))));
             playerCells.add(playerCell);
         }
+    }
+
+
+    public boolean canMove(Vector2 pos, Direction orientation) {
+        //pos = pos + Direction
+        if(orientation == Direction.NORTH) {
+            pos.add(0,1);
+        }
+        else if(orientation == Direction.SOUTH) {
+            pos.add(0,-1);
+        }
+        else if(orientation == Direction.EAST) {
+            pos.add(1,0);
+        }
+        else if(orientation == Direction.WEST) {
+            pos.add(-1,0);
+        }
+        if(layers.get("Walls").getCell((int) pos.x, (int) pos.y) != null)
+            return false;
+        return true;
     }
 
     public void addPlayer(IPlayer player){
