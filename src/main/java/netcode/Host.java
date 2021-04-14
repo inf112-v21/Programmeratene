@@ -154,7 +154,6 @@ public class Host extends Listener {
             c.sendTCP(p);
     }
 
-
     public GameClient getGameClient() {
         return gameClient;
     }
