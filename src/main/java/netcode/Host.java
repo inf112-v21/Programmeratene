@@ -101,7 +101,7 @@ public class Host extends Listener {
         if(playerMap.values().stream().anyMatch(IPlayer::getAlive))
             dealCards();
         else
-            System.exit(0);
+            kryoServer.stop();
     }
 
     public void positionCheck(IPlayer player){

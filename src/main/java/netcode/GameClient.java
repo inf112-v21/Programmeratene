@@ -69,13 +69,13 @@ public class GameClient extends Listener {
             game.getBoard().drawPlayers();
             if(players.stream().noneMatch(IPlayer::getAlive)){
                 System.out.println("All players died!");
-                System.exit(0);
+                kryoClient.stop();
             }
         }
         else if(p instanceof PlayerWonPacket){
             IPlayer player = ((PlayerWonPacket) p).player;
             System.out.println(player.getPlayerName() + " won!");
-            System.exit(0);
+            kryoClient.stop();
         }
     }
 
