@@ -64,8 +64,13 @@ public class GameClient extends Listener {
             game.getBoard().addPlayer(((AddPlayerPacket) p).player);
         }
         else if(p instanceof PlayerDataPacket){
-            game.getBoard().setPlayers(((PlayerDataPacket) p).players);
+            ArrayList<IPlayer> players = ((PlayerDataPacket) p).players;
+            game.getBoard().setPlayers(players);
             game.getBoard().drawPlayers();
+            if(players.stream().noneMatch(IPlayer::getAlive)){
+                System.out.println("All players died!");
+                System.exit(0);
+            }
         }
         else if(p instanceof PlayerWonPacket){
             IPlayer player = ((PlayerWonPacket) p).player;

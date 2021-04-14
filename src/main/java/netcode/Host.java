@@ -14,6 +14,7 @@ import player.HumanPlayer;
 import player.IPlayer;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Host extends Listener {
     private static final int udpPort = 27960;
@@ -59,11 +60,10 @@ public class Host extends Listener {
             registersReceived++;
 
             ArrayList<ICard> cards = ((CardListPacket) p).cards;
-            System.out.println("Host received cards: " + cards.toString());
-
             playerMap.get(c).setRegisters(cards);
+            //System.out.println("Host received cards: " + cards.toString()); //for debugging
 
-            if(registersReceived >= playerMap.size())
+            if(registersReceived >= playerMap.entrySet().stream().filter(x -> x.getValue().getAlive()).count())
                 processRound();
         }
     }
@@ -79,14 +79,14 @@ public class Host extends Listener {
             ArrayList<IPlayer> players = new ArrayList<>(playerMap.values());
             int finalI = i;
             players.sort((o1, o2) -> o1.getRegisters().get(finalI).compareTo(o2.getRegisters().get(finalI)));
-            for (IPlayer player : players) {
+            for (IPlayer player : players.stream().filter(IPlayer::getAlive).collect(Collectors.toList())) {
                 ICard currentCard = player.getRegisters().get(i);
                 if (currentCard instanceof CardMove)
                     player.moveRobot(((CardMove) currentCard).getSteps());
                 else if (currentCard instanceof CardTurn)
                     player.rotateRobot(((CardTurn) currentCard).getTurnSteps());
 
-                positionCheck(player);
+                positionCheck(player); //Check for hole/flag
 
                 sendPlayerData(); //Tell all clients to update board with new positions
 
@@ -97,7 +97,11 @@ public class Host extends Listener {
                 }
             }
         }
-        dealCards();
+
+        if(playerMap.values().stream().anyMatch(IPlayer::getAlive))
+            dealCards();
+        else
+            System.exit(0);
     }
 
     public void positionCheck(IPlayer player){
@@ -107,8 +111,10 @@ public class Host extends Listener {
                 sendPlayerWonMessage(player);
             case "hole":
                 player.applyDamage(9);
-                player.setPos(new Vector2(0,0));
                 player.setOrientation(Direction.NORTH);
+                player.setPos(new Vector2(0,0));
+                if(!player.getAlive())
+                    player.setPos(new Vector2(-1,-1));
             default:
                 //something
         }
@@ -147,6 +153,7 @@ public class Host extends Listener {
         for(Connection c : playerMap.keySet())
             c.sendTCP(p);
     }
+
 
     public GameClient getGameClient() {
         return gameClient;
