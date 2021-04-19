@@ -35,6 +35,7 @@ public abstract class AbstractPlayer implements IPlayer {
         this.lifeTokens = 3;
         this.orientation = Direction.NORTH;
         this.playerPos = new Vector2(spawnPos);
+        this.spawnPos = new Vector2(spawnPos);
     }
 
 
@@ -44,7 +45,7 @@ public abstract class AbstractPlayer implements IPlayer {
         if(damageTokens >= 9) {
             lifeTokens--;
             damageTokens = 0;
-            setPos(spawnPos);
+            setPos(new Vector2(spawnPos));
             if(lifeTokens <= 0) {
                 kill();
             }

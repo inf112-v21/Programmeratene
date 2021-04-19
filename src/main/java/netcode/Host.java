@@ -116,9 +116,6 @@ public class Host extends Listener {
             case "hole":
                 player.applyDamage(9);
                 player.setOrientation(Direction.NORTH);
-                player.setPos(new Vector2(0,0));
-                if(!player.getAlive())
-                    player.setPos(new Vector2(-1,-1));
             default:
                 //something
         }
