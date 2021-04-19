@@ -24,6 +24,7 @@ public class Host extends Listener {
     GameClient gameClient;
 
     HashMap<Connection,IPlayer> playerMap;
+    ArrayList<Vector2> spawns;
     int registersReceived = 0;
 
     public Host() throws Exception{
@@ -36,6 +37,7 @@ public class Host extends Listener {
 
         playerMap = new HashMap<>();
         gameClient = new GameClient(true);
+        spawns = gameClient.getGame().getBoard().getSpawns();
     }
 
     //This is run when a connection is received
@@ -43,7 +45,7 @@ public class Host extends Listener {
         System.out.println("Received a connection from "+c.getRemoteAddressTCP().getHostString());
         c.setTimeout(0);
 
-        IPlayer newPlayer = new HumanPlayer("Player "+(playerMap.size()+1));
+        IPlayer newPlayer = new HumanPlayer("Player "+(playerMap.size()+1), spawns.get(playerMap.size()));
         playerMap.put(c, newPlayer);
 
         sendNewPlayerMessage(newPlayer); //Make alle clients add the new player
@@ -128,6 +130,7 @@ public class Host extends Listener {
             if( !entry.getValue().getAlive()) {
                 continue;
             }
+            System.out.println(entry.getValue().getPos());
             CardListPacket playerHandPacket = new CardListPacket();
             for (int i = 0; i < 9; i++) {
                 playerHandPacket.cards.add(gameDeck.get(0));

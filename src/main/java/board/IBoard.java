@@ -32,6 +32,8 @@ public interface IBoard {
      */
     String getElementInPos(Vector2 pos);
 
+    ArrayList<Vector2> getSpawns();
+
     /*
         SETTERS
      */

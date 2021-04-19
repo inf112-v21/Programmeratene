@@ -102,6 +102,15 @@ public class Board implements IBoard {
         return "floortile";
     }
 
+    public ArrayList<Vector2> getSpawns() {
+        ArrayList<Vector2> spawns = new ArrayList<>();
+        for(int y=0; y<BOARD_HEIGHT; y++)
+            for(int x=0; x<BOARD_WIDTH; x++)
+                if(layers.get("Spawn").getCell(x, y) != null)
+                    spawns.add(new Vector2(x, y));
+        return spawns;
+    }
+
     public TiledMap getTiledMap() {
         return tiledMap;
     }

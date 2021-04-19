@@ -15,12 +15,17 @@ public abstract class AbstractPlayer implements IPlayer {
     int lifeTokens;
     Direction orientation;
     Vector2 playerPos;
+    Vector2 spawnPos;
 
     AbstractPlayer(){
 
     }
 
     AbstractPlayer(String playerName){
+        this(playerName, new Vector2(0,0));
+    }
+
+    AbstractPlayer(String playerName, Vector2 spawnPos){
         this.playerName = playerName;
         this.deck = new ArrayList<>();
         this.registers = new ArrayList<>();
@@ -29,7 +34,7 @@ public abstract class AbstractPlayer implements IPlayer {
         this.damageTokens = 0;
         this.lifeTokens = 3;
         this.orientation = Direction.NORTH;
-        this.playerPos = new Vector2(0,0);
+        this.playerPos = new Vector2(spawnPos);
     }
 
 
@@ -39,6 +44,7 @@ public abstract class AbstractPlayer implements IPlayer {
         if(damageTokens >= 9) {
             lifeTokens--;
             damageTokens = 0;
+            setPos(spawnPos);
             if(lifeTokens <= 0) {
                 kill();
             }
@@ -60,7 +66,7 @@ public abstract class AbstractPlayer implements IPlayer {
 
     public void kill() {
         alive = false;
-        setPos( new Vector2(-1,-1) );
+        setPos(new Vector2(-1,-1));
     }
 
     public void moveRobot(int steps) {
@@ -107,7 +113,7 @@ public abstract class AbstractPlayer implements IPlayer {
 
     @Override
     public void setPos(Vector2 pos) {
-        this.playerPos = pos;
+        this.playerPos = new Vector2(pos);
     }
 
     @Override
