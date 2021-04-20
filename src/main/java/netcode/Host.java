@@ -1,6 +1,5 @@
 package netcode;
 
-import board.Board;
 import card.*;
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Connection;
