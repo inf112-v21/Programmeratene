@@ -63,77 +63,77 @@ public class Board implements IBoard {
         int[] east = new int[]{8, 16, 23};
         int[] west = new int[]{24, 30, 32};
 
-            switch (orientation) {
-                case NORTH:
-                    try {
-                        if (Arrays.stream(north).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
-                            check = false;
-                        }
+        switch (orientation) {
+            case NORTH:
+                try {
+                    if (Arrays.stream(north).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                        check = false;
                     }
-                    catch (Exception e) {
-                        //If we have nullpointerexception here, it means we have no walls here, and we can continue with checking the location the robot wants to move to.
+                }
+                catch (Exception e) {
+                    //If we have nullpointerexception here, it means we have no walls here, and we can continue with checking the location the robot wants to move to.
+                }
+                try {
+                    if (Arrays.stream(south).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                        check = false;
+                        //If there is a south wall from this direction, or north wall from the robot`s direction before moving, the robot can`t move here.
                     }
-                    try {
-                        if (Arrays.stream(south).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
-                            check = false;
-                            //If there is a south wall from this direction, or north wall from the robot`s direction before moving, the robot can`t move here.
-                        }
-                    }
-                    catch (Exception e) {
-                    }
+                }
+                catch (Exception e) {
+                }
 
-                    break;
-                case SOUTH:
-                    try {
-                        if (Arrays.stream(south).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
-                            check = false;
-                        }
+                break;
+            case SOUTH:
+                try {
+                    if (Arrays.stream(south).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                        check = false;
                     }
-                    catch (Exception e) {
+                }
+                catch (Exception e) {
+                }
+                try {
+                    if (Arrays.stream(north).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                        check = false;
                     }
-                    try {
-                        if (Arrays.stream(north).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
-                            check = false;
-                        }
+                }
+                catch (Exception e) {
+                }
+                break;
+            case EAST:
+                try {
+                    if (Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                        check = false;
                     }
-                    catch (Exception e) {
+                }
+                catch (Exception e) {
+                }
+                try {
+                    if (Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                        check = false;
                     }
-                    break;
-                case EAST:
-                    try {
-                        if (Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
-                            check = false;
-                        }
-                    }
-                    catch (Exception e) {
-                    }
-                    try {
-                        if (Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
-                            check = false;
-                        }
-                    }
-                    catch (Exception e) {
-                    }
+                }
+                catch (Exception e) {
+                }
 
-                    break;
-                case WEST:
-                    try {
-                        if (Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
-                            check = false;
-                        }
+                break;
+            case WEST:
+                try {
+                    if (Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                        check = false;
                     }
-                    catch (Exception e) {
+                }
+                catch (Exception e) {
+                }
+                try {
+                    if (Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                        check = false;
                     }
-                    try {
-                        if (Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
-                            check = false;
-                        }
-                    }
-                    catch (Exception e) {
-                    }
+                }
+                catch (Exception e) {
+                }
 
-                    break;
-            }
+                break;
+        }
         return check;
     }
 
