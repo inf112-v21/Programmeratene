@@ -6,7 +6,6 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import game.Direction;
-import netcode.packets.AddPlayerPacket;
 import netcode.packets.CardListPacket;
 import netcode.packets.PlayerDataPacket;
 import netcode.packets.PlayerWonPacket;
@@ -48,7 +47,7 @@ public class Host extends Listener {
         IPlayer newPlayer = new HumanPlayer("Player "+(playerMap.size()+1), spawns.get(playerMap.size()));
         playerMap.put(c, newPlayer);
 
-        sendNewPlayerMessage(newPlayer); //Make alle clients add the new player
+        sendPlayerData(); //Make alle clients add the new player
 
         Scanner sc = new Scanner(System.in);
         System.out.print("Wait for more players? (y/n): ");
@@ -139,12 +138,6 @@ public class Host extends Listener {
 
     public void sendPlayerWonMessage(IPlayer player){
         PlayerWonPacket p = new PlayerWonPacket(player);
-        for(Connection c : playerMap.keySet())
-            c.sendTCP(p);
-    }
-
-    public void sendNewPlayerMessage(IPlayer player) {
-        AddPlayerPacket p = new AddPlayerPacket(player);
         for(Connection c : playerMap.keySet())
             c.sendTCP(p);
     }
