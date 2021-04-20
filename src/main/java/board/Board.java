@@ -11,9 +11,11 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
+import game.Direction;
 import player.IPlayer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Board implements IBoard {
@@ -25,8 +27,6 @@ public class Board implements IBoard {
     private final TiledMap tiledMap;
     private final HashMap<String, TiledMapTileLayer> layers;
     private final ArrayList<Cell> playerCells;
-
-
 
     private ArrayList<IPlayer> players;
 
@@ -50,6 +50,91 @@ public class Board implements IBoard {
             playerCell.setTile(new StaticTiledMapTile(new TextureRegion(new Texture("robots/"+robotTextureNames[i]+".png"))));
             playerCells.add(playerCell);
         }
+    }
+
+
+    public boolean canMove(Vector2 pos, Direction orientation) {
+        boolean check = true;
+        Vector2 pos2 = new Vector2(pos);
+        pos2.add(orientation.getVector());
+        //Wall-tiles id in their respective list. Walls facing north will be in int[] north, etc.
+        int[] north = new int[]{24, 31, 16};
+        int[] south = new int[]{29, 32, 8};
+        int[] east = new int[]{8, 16, 23};
+        int[] west = new int[]{24, 30, 32};
+
+        switch (orientation) {
+            case NORTH:
+                try {
+                    if (Arrays.stream(north).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                        check = false;
+                    }
+                }
+                catch (Exception e) {
+                    //If we have nullpointerexception here, it means we have no walls here, and we can continue with checking the location the robot wants to move to.
+                }
+                try {
+                    if (Arrays.stream(south).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                        check = false;
+                        //If there is a south wall from this direction, or north wall from the robot`s direction before moving, the robot can`t move here.
+                    }
+                }
+                catch (Exception e) {
+                }
+
+                break;
+            case SOUTH:
+                try {
+                    if (Arrays.stream(south).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                        check = false;
+                    }
+                }
+                catch (Exception e) {
+                }
+                try {
+                    if (Arrays.stream(north).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                        check = false;
+                    }
+                }
+                catch (Exception e) {
+                }
+                break;
+            case EAST:
+                try {
+                    if (Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                        check = false;
+                    }
+                }
+                catch (Exception e) {
+                }
+                try {
+                    if (Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                        check = false;
+                    }
+                }
+                catch (Exception e) {
+                }
+
+                break;
+            case WEST:
+                try {
+                    if (Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                        check = false;
+                    }
+                }
+                catch (Exception e) {
+                }
+                try {
+                    if (Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                        check = false;
+                    }
+                }
+                catch (Exception e) {
+                }
+
+                break;
+        }
+        return check;
     }
 
     public void addPlayer(IPlayer player){

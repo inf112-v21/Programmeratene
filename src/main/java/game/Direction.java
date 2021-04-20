@@ -1,11 +1,14 @@
 package game;
 
+import com.badlogic.gdx.math.Vector2;
+
 public enum Direction {
     NORTH,EAST,SOUTH,WEST;
 
     private Direction reverse;
     private Direction right;
     private Direction left;
+    private Vector2 vector;
 
     static {
         NORTH.reverse = SOUTH;
@@ -23,6 +26,12 @@ public enum Direction {
         SOUTH.reverse = NORTH;
         SOUTH.left = EAST;
         SOUTH.right = WEST;
+
+        NORTH.vector = new Vector2(0,1);
+        SOUTH.vector = new Vector2(0,-1);
+        EAST.vector = new Vector2(1,0);
+        WEST.vector = new Vector2(-1,0);
+
     }
 
     public Direction getReverse() {
@@ -35,5 +44,8 @@ public enum Direction {
 
     public Direction getLeft() {
         return left;
+    }
+    public Vector2 getVector() {
+        return vector;
     }
 }
