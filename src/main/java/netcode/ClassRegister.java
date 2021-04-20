@@ -6,7 +6,6 @@ import card.ICard;
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryo.Kryo;
 import game.Direction;
-import netcode.packets.AddPlayerPacket;
 import netcode.packets.CardListPacket;
 import netcode.packets.PlayerDataPacket;
 import netcode.packets.PlayerWonPacket;
@@ -18,7 +17,6 @@ public class ClassRegister {
 
     static void registerAll(Kryo k){
         k.register(CardListPacket.class);
-        k.register(AddPlayerPacket.class);
         k.register(PlayerDataPacket.class);
         k.register(PlayerWonPacket.class);
 
