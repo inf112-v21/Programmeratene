@@ -83,57 +83,57 @@ public class Board implements IBoard {
                     }
 
                     break;
-                    case SOUTH:
-                        try {
-                            if (Arrays.stream(south).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
-                                check = false;
-                            }
+                case SOUTH:
+                    try {
+                        if (Arrays.stream(south).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                            check = false;
                         }
-                        catch (Exception e) {
+                    }
+                    catch (Exception e) {
+                    }
+                    try {
+                        if (Arrays.stream(north).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                            check = false;
                         }
-                        try {
-                            if (Arrays.stream(north).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
-                                check = false;
-                            }
+                    }
+                    catch (Exception e) {
+                    }
+                    break;
+                case EAST:
+                    try {
+                        if (Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                            check = false;
                         }
-                        catch (Exception e) {
+                    }
+                    catch (Exception e) {
+                    }
+                    try {
+                        if (Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                            check = false;
                         }
-                        break;
-                    case EAST:
-                        try {
-                            if (Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
-                                check = false;
-                            }
-                        }
-                        catch (Exception e) {
-                        }
-                        try {
-                            if (Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
-                                check = false;
-                            }
-                        }
-                        catch (Exception e) {
-                        }
+                    }
+                    catch (Exception e) {
+                    }
 
-                        break;
-                    case WEST:
-                        try {
-                            if (Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
-                                check = false;
-                            }
+                    break;
+                case WEST:
+                    try {
+                        if (Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                            check = false;
                         }
-                        catch (Exception e) {
+                    }
+                    catch (Exception e) {
+                    }
+                    try {
+                        if (Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                            check = false;
                         }
-                        try {
-                            if (Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
-                                check = false;
-                            }
-                        }
-                        catch (Exception e) {
-                        }
+                    }
+                    catch (Exception e) {
+                    }
 
-                        break;
-                }
+                    break;
+            }
         return check;
     }
 
