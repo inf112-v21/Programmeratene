@@ -14,7 +14,6 @@ import com.badlogic.gdx.math.Vector2;
 import game.Direction;
 import player.IPlayer;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,8 +27,6 @@ public class Board implements IBoard {
     private final TiledMap tiledMap;
     private final HashMap<String, TiledMapTileLayer> layers;
     private final ArrayList<Cell> playerCells;
-
-
 
     private ArrayList<IPlayer> players;
 
@@ -60,6 +57,7 @@ public class Board implements IBoard {
         boolean check = true;
         Vector2 pos2 = new Vector2(pos);
         pos2.add(orientation.getVector());
+        //Wall-tiles id in their respective list. Walls facing north will be in int[] north, etc.
         int[] north = new int[]{24, 31, 16};
         int[] south = new int[]{29, 32, 8};
         int[] east = new int[]{8, 16, 23};
