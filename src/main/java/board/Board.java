@@ -14,7 +14,9 @@ import com.badlogic.gdx.math.Vector2;
 import game.Direction;
 import player.IPlayer;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Board implements IBoard {
@@ -55,21 +57,42 @@ public class Board implements IBoard {
 
 
     public boolean canMove(Vector2 pos, Direction orientation) {
-        //pos = pos + Direction
-        if(orientation == Direction.NORTH) {
-            pos.add(0,1);
+        Vector2 pos2 = new Vector2(pos);
+        pos2.add(orientation.getVector());
+        int[] north = new int[]{24, 31,16};
+        int[] south = new int[]{29, 32, 8};
+        int[] east = new int[]{8,16,23};
+        int[] west = new int[]{24,30,32};
+
+        if(layers.get("Walls").getCell((int) pos.x, (int) pos.y) != null || layers.get("Walls").getCell((int) pos2.x, (int) pos2.y) != null) {
+            switch (orientation) {
+                case NORTH:
+                    if (Arrays.stream(north).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId())) || Arrays.stream(south).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                        System.out.println("cant north");
+                        return false;
+
+                    }
+                    break;
+                case SOUTH:
+                    if (Arrays.stream(south).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId())) || Arrays.stream(north).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                        System.out.println("cant south");
+                        return false;
+                    }
+                    break;
+                case EAST:
+                    if (Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId())) || Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                        System.out.println("cant east");
+                        return false;
+                    }
+                    break;
+                case WEST:
+                    if (Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId())) || Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                        System.out.println("cant west");
+                        return false;
+                    }
+                    break;
+            }
         }
-        else if(orientation == Direction.SOUTH) {
-            pos.add(0,-1);
-        }
-        else if(orientation == Direction.EAST) {
-            pos.add(1,0);
-        }
-        else if(orientation == Direction.WEST) {
-            pos.add(-1,0);
-        }
-        if(layers.get("Walls").getCell((int) pos.x, (int) pos.y) != null)
-            return false;
         return true;
     }
 

@@ -3,7 +3,7 @@ package game;
 import com.badlogic.gdx.math.Vector2;
 
 public enum Direction {
-    NORTH,EAST,SOUTH,WEST;
+    NORTH,EAST,SOUTH,WEST, orientation;
 
     private Direction reverse;
     private Direction right;
