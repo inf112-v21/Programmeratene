@@ -57,43 +57,86 @@ public class Board implements IBoard {
 
 
     public boolean canMove(Vector2 pos, Direction orientation) {
+        boolean check = true;
         Vector2 pos2 = new Vector2(pos);
         pos2.add(orientation.getVector());
-        int[] north = new int[]{24, 31,16};
+        int[] north = new int[]{24, 31, 16};
         int[] south = new int[]{29, 32, 8};
-        int[] east = new int[]{8,16,23};
-        int[] west = new int[]{24,30,32};
+        int[] east = new int[]{8, 16, 23};
+        int[] west = new int[]{24, 30, 32};
 
-        if(layers.get("Walls").getCell((int) pos.x, (int) pos.y) != null || layers.get("Walls").getCell((int) pos2.x, (int) pos2.y) != null) {
             switch (orientation) {
                 case NORTH:
-                    if (Arrays.stream(north).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId())) || Arrays.stream(south).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
-                        System.out.println("cant north");
-                        return false;
+                    try {
+                        if (Arrays.stream(north).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                            check = false;
+                        }
+                    }
+                    catch (Exception e) {
+                        //If we have nullpointerexception here, it means we have no walls here, and we can continue with checking the location the robot wants to move to.
+                    }
+                    try {
+                        if (Arrays.stream(south).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                            check = false;
+                            //If there is a south wall from this direction, or north wall from the robot`s direction before moving, the robot can`t move here.
+                        }
+                    }
+                    catch (Exception e) {
+                    }
 
-                    }
                     break;
-                case SOUTH:
-                    if (Arrays.stream(south).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId())) || Arrays.stream(north).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
-                        System.out.println("cant south");
-                        return false;
-                    }
-                    break;
-                case EAST:
-                    if (Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId())) || Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
-                        System.out.println("cant east");
-                        return false;
-                    }
-                    break;
-                case WEST:
-                    if (Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId())) || Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
-                        System.out.println("cant west");
-                        return false;
-                    }
-                    break;
-            }
-        }
-        return true;
+                    case SOUTH:
+                        try {
+                            if (Arrays.stream(south).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                                check = false;
+                            }
+                        }
+                        catch (Exception e) {
+                        }
+                        try {
+                            if (Arrays.stream(north).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                                check = false;
+                            }
+                        }
+                        catch (Exception e) {
+                        }
+                        break;
+                    case EAST:
+                        try {
+                            if (Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                                check = false;
+                            }
+                        }
+                        catch (Exception e) {
+                        }
+                        try {
+                            if (Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                                check = false;
+                            }
+                        }
+                        catch (Exception e) {
+                        }
+
+                        break;
+                    case WEST:
+                        try {
+                            if (Arrays.stream(west).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos.x, (int) pos.y).getTile().getId()))) {
+                                check = false;
+                            }
+                        }
+                        catch (Exception e) {
+                        }
+                        try {
+                            if (Arrays.stream(east).anyMatch(x -> x == (layers.get("Walls").getCell((int) pos2.x, (int) pos2.y).getTile().getId()))) {
+                                check = false;
+                            }
+                        }
+                        catch (Exception e) {
+                        }
+
+                        break;
+                }
+        return check;
     }
 
     public void addPlayer(IPlayer player){

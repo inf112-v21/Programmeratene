@@ -85,6 +85,11 @@ public class Host extends Listener {
             for (IPlayer player : players.stream().filter(IPlayer::getAlive).collect(Collectors.toList())) {
                 ICard currentCard = player.getRegisters().get(i);
                 if (currentCard instanceof CardMove) {
+                    if (((CardMove) currentCard).getSteps() == -1) {
+                        if(gameClient.game.getBoard().canMove(player.getPos(), player.getOrientation().getReverse()))
+                            //Using getReverse in canMove function since we are interested in the opposite direction here
+                            player.moveRobot(-1);
+                    }
                     for (int j = 0; j < ((CardMove) currentCard).getSteps(); j++) {
                         if (gameClient.game.getBoard().canMove(player.getPos(), player.getOrientation())) {
                             player.moveRobot(1);
