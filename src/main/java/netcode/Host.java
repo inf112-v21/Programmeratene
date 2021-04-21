@@ -71,6 +71,7 @@ public class Host extends Listener {
 
     //This is run when a client has disconnected
     public void disconnected(Connection c) {
+        playerMap.get(c).kill();
     }
 
 
@@ -89,17 +90,36 @@ public class Host extends Listener {
                             //Using getReverse in canMove function since we are interested in the opposite direction here
                             player.moveRobot(-1);
                             positionCheck(player); //Check for hole/flag
+                            sendPlayerData();
+                            try { //Delay for syns skyld
+                                Thread.sleep(500);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                     for (int j = 0; j < ((CardMove) currentCard).getSteps(); j++) {
                         if (gameClient.game.getBoard().canMove(player.getPos(), player.getOrientation())) {
                             player.moveRobot(1);
                             positionCheck(player); //Check for hole/flag
+                            sendPlayerData();
+                            try { //Delay for syns skyld
+                                Thread.sleep(500);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
-                else if (currentCard instanceof CardTurn)
+                else if (currentCard instanceof CardTurn) {
                     player.rotateRobot(((CardTurn) currentCard).getTurnSteps());
+                    sendPlayerData();
+                    try { //Delay for syns skyld
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
 
 
                 sendPlayerData(); //Tell all clients to update board with new positions
@@ -122,7 +142,6 @@ public class Host extends Listener {
         String standingOn = gameClient.getGame().getBoard().getElementInPos(player.getPos());
         switch (standingOn){
             case "flag":
-                sendPlayerData();
                 sendPlayerWonMessage(player);
                 kryoServer.stop();
                 break;
