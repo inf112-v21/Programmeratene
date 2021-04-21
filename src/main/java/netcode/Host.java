@@ -39,6 +39,7 @@ public class Host extends Listener {
         gameClient = new GameClient(true);
         spawns = gameClient.getGame().getBoard().getSpawns();
         flags = gameClient.getGame().getBoard().getFlags();
+        System.out.println(flags);
     }
 
     //This is run when a connection is received
@@ -147,9 +148,10 @@ public class Host extends Listener {
                 int flag = gameClient.getGame().getBoard().getLayers().get("Flag").getCell((int) player.getPos().x, (int) player.getPos().y).getTile().getId();
                 if(flag == flags.get(player.getVisited().size()))
                     player.addVisitedFlag(flag);
-                if(player.getVisited().size() >= flags.size())
+                if(player.getVisited().size() >= flags.size()) {
                     sendPlayerWonMessage(player);
                     kryoServer.stop();
+                }
                 break;
             case "hole":
                 player.applyDamage(9);

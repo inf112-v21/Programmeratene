@@ -37,6 +37,7 @@ public abstract class AbstractPlayer implements IPlayer {
         this.orientation = Direction.NORTH;
         this.playerPos = new Vector2(spawnPos);
         this.spawnPos = new Vector2(spawnPos);
+        this.visitedFlags = new ArrayList<>();
     }
 
 

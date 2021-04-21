@@ -16,6 +16,7 @@ import player.IPlayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class Board implements IBoard {
@@ -144,6 +145,13 @@ public class Board implements IBoard {
             for(int x=0; x<BOARD_WIDTH; x++)
                 if(layers.get("Flag").getCell(x, y) != null)
                     flags.add(layers.get("Flag").getCell(x,y).getTile().getId());
+        flags.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }
+        });
+
         return flags;
     }
 
