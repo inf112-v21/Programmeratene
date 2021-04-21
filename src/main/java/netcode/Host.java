@@ -39,7 +39,6 @@ public class Host extends Listener {
         gameClient = new GameClient(true);
         spawns = gameClient.getGame().getBoard().getSpawns();
         flags = gameClient.getGame().getBoard().getFlags();
-        System.out.println(flags);
     }
 
     //This is run when a connection is received
