@@ -1,11 +1,13 @@
 package board;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import game.Direction;
 import player.IPlayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface IBoard {
 
@@ -49,9 +51,13 @@ public interface IBoard {
 
     int getTileTextureSize();
 
+    HashMap<String, TiledMapTileLayer> getLayers();
 
-     int getBOARD_WIDTH();
-     int getBOARD_HEIGHT();
+    int getBOARD_WIDTH();
+
+    int getBOARD_HEIGHT();
 
     boolean canMove(Vector2 pos, Direction orientation);
+
+    ArrayList<Integer> getFlags();
 }

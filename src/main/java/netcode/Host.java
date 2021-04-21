@@ -24,6 +24,7 @@ public class Host extends Listener {
 
     HashMap<Connection,IPlayer> playerMap;
     ArrayList<Vector2> spawns;
+    ArrayList<Integer> flags;
     int registersReceived = 0;
 
     public Host() throws Exception{
@@ -37,6 +38,7 @@ public class Host extends Listener {
         playerMap = new HashMap<>();
         gameClient = new GameClient(true);
         spawns = gameClient.getGame().getBoard().getSpawns();
+        flags = gameClient.getGame().getBoard().getFlags();
     }
 
     //This is run when a connection is received
@@ -142,8 +144,12 @@ public class Host extends Listener {
         String standingOn = gameClient.getGame().getBoard().getElementInPos(player.getPos());
         switch (standingOn){
             case "flag":
-                sendPlayerWonMessage(player);
-                kryoServer.stop();
+                int flag = gameClient.getGame().getBoard().getLayers().get("Flag").getCell((int) player.getPos().x, (int) player.getPos().y).getTile().getId();
+                if(flag == flags.get(player.getVisited().size()))
+                    player.addVisitedFlag(flag);
+                if(player.getVisited().size() >= flags.size())
+                    sendPlayerWonMessage(player);
+                    kryoServer.stop();
                 break;
             case "hole":
                 player.applyDamage(9);

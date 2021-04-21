@@ -137,6 +137,16 @@ public class Board implements IBoard {
         return check;
     }
 
+    @Override
+    public ArrayList<Integer> getFlags() {
+        ArrayList<Integer> flags = new ArrayList<>();
+        for(int y=0; y<BOARD_HEIGHT; y++)
+            for(int x=0; x<BOARD_WIDTH; x++)
+                if(layers.get("Flag").getCell(x, y) != null)
+                    flags.add(layers.get("Flag").getCell(x,y).getTile().getId());
+        return flags;
+    }
+
     public void addPlayer(IPlayer player){
         players.add(player);
         drawPlayers();
@@ -194,6 +204,10 @@ public class Board implements IBoard {
                 if(layers.get("Spawn").getCell(x, y) != null)
                     spawns.add(new Vector2(x, y));
         return spawns;
+    }
+
+    public HashMap<String, TiledMapTileLayer> getLayers() {
+        return layers;
     }
 
     public TiledMap getTiledMap() {
