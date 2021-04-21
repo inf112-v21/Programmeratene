@@ -3,6 +3,8 @@ package player;
 import game.Direction;
 import card.*;
 import com.badlogic.gdx.math.Vector2;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class AbstractPlayer implements IPlayer {
@@ -10,6 +12,7 @@ public abstract class AbstractPlayer implements IPlayer {
     ArrayList<ICard> deck; //Tildelte kort
     ArrayList<ICard> registers; //Valgte kort
     ArrayList<ICard> lockedRegisters; //Kort som er låst pga damage
+    ArrayList<Integer> visitedFlags; // liste med besøkte flagg
     int damageTokens;
     int lifeTokens;
     Direction orientation;
@@ -34,6 +37,7 @@ public abstract class AbstractPlayer implements IPlayer {
         this.orientation = Direction.NORTH;
         this.playerPos = new Vector2(spawnPos);
         this.spawnPos = new Vector2(spawnPos);
+        this.visitedFlags = new ArrayList<>();
     }
 
 
@@ -98,6 +102,14 @@ public abstract class AbstractPlayer implements IPlayer {
 
     public void setRegisters(ArrayList<ICard> cardsToAdd){
         this.registers = cardsToAdd;
+    }
+
+    public ArrayList<Integer> getVisited() {
+        return visitedFlags;
+    }
+
+    public void addVisitedFlag(int x) {
+        visitedFlags.add(x);
     }
 
     @Override

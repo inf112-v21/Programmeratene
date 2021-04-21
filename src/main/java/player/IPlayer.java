@@ -41,6 +41,8 @@ public interface IPlayer {
      */
     Direction rotateRobot(int turnSteps);
 
+    void addVisitedFlag(int x);
+
     /*
         SETTERS
      */
@@ -60,4 +62,6 @@ public interface IPlayer {
     Direction getOrientation();
 
     ArrayList<ICard> getRegisters();
+
+    ArrayList<Integer> getVisited();
 }

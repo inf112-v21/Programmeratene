@@ -16,6 +16,7 @@ import player.IPlayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class Board implements IBoard {
@@ -137,6 +138,23 @@ public class Board implements IBoard {
         return check;
     }
 
+    @Override
+    public ArrayList<Integer> getFlags() {
+        ArrayList<Integer> flags = new ArrayList<>();
+        for(int y=0; y<BOARD_HEIGHT; y++)
+            for(int x=0; x<BOARD_WIDTH; x++)
+                if(layers.get("Flag").getCell(x, y) != null)
+                    flags.add(layers.get("Flag").getCell(x,y).getTile().getId());
+        flags.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }
+        });
+
+        return flags;
+    }
+
     public void addPlayer(IPlayer player){
         players.add(player);
         drawPlayers();
@@ -194,6 +212,10 @@ public class Board implements IBoard {
                 if(layers.get("Spawn").getCell(x, y) != null)
                     spawns.add(new Vector2(x, y));
         return spawns;
+    }
+
+    public HashMap<String, TiledMapTileLayer> getLayers() {
+        return layers;
     }
 
     public TiledMap getTiledMap() {
