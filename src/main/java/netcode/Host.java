@@ -85,21 +85,22 @@ public class Host extends Listener {
                 ICard currentCard = player.getRegisters().get(i);
                 if (currentCard instanceof CardMove) {
                     if (((CardMove) currentCard).getSteps() == -1) {
-                        if(gameClient.game.getBoard().canMove(player.getPos(), player.getOrientation().getReverse()))
+                        if(gameClient.game.getBoard().canMove(player.getPos(), player.getOrientation().getReverse())) {
                             //Using getReverse in canMove function since we are interested in the opposite direction here
                             player.moveRobot(-1);
+                            positionCheck(player); //Check for hole/flag
+                        }
                     }
                     for (int j = 0; j < ((CardMove) currentCard).getSteps(); j++) {
                         if (gameClient.game.getBoard().canMove(player.getPos(), player.getOrientation())) {
                             player.moveRobot(1);
+                            positionCheck(player); //Check for hole/flag
                         }
                     }
                 }
-
                 else if (currentCard instanceof CardTurn)
                     player.rotateRobot(((CardTurn) currentCard).getTurnSteps());
 
-                positionCheck(player); //Check for hole/flag
 
                 sendPlayerData(); //Tell all clients to update board with new positions
 
@@ -121,15 +122,13 @@ public class Host extends Listener {
         String standingOn = gameClient.getGame().getBoard().getElementInPos(player.getPos());
         switch (standingOn){
             case "flag":
+                sendPlayerData();
                 sendPlayerWonMessage(player);
-                gameClient.kryoClient.stop();
                 kryoServer.stop();
+                break;
             case "hole":
                 player.applyDamage(9);
                 player.setOrientation(Direction.NORTH);
-
-            default:
-                //something
         }
     }
 
