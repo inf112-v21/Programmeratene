@@ -30,6 +30,11 @@ public interface IPlayer {
     void moveRobot(int steps);
 
     /**
+     * Kills robot (sets lifetokens to 0 and moves to pos (-1,-1))
+     */
+    void kill();
+
+    /**
      * Rotates the robot
      * @param turnSteps - amount of steps to turn (-1 = 90deg left, 1 = 90deg right, 2 = 180deg)
      * @return the updated orientation of the robot

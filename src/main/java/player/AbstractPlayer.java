@@ -10,7 +10,6 @@ public abstract class AbstractPlayer implements IPlayer {
     ArrayList<ICard> deck; //Tildelte kort
     ArrayList<ICard> registers; //Valgte kort
     ArrayList<ICard> lockedRegisters; //Kort som er låst pga damage
-    boolean alive;
     int damageTokens;
     int lifeTokens;
     Direction orientation;
@@ -30,7 +29,6 @@ public abstract class AbstractPlayer implements IPlayer {
         this.deck = new ArrayList<>();
         this.registers = new ArrayList<>();
         this.lockedRegisters = new ArrayList<>();
-        this.alive = true;
         this.damageTokens = 0;
         this.lifeTokens = 3;
         this.orientation = Direction.NORTH;
@@ -62,11 +60,11 @@ public abstract class AbstractPlayer implements IPlayer {
 
     @Override
     public boolean getAlive() {
-        return alive;
+        return lifeTokens>0;
     }
 
     public void kill() {
-        alive = false;
+        lifeTokens = 0;
         setPos(new Vector2(-1,-1));
     }
 
