@@ -164,7 +164,6 @@ public class Host extends Listener {
             if( !entry.getValue().getAlive()) {
                 continue;
             }
-            System.out.println(entry.getValue().getPos());
             CardListPacket playerHandPacket = new CardListPacket();
             for (int i = 0; i < 9; i++) {
                 playerHandPacket.cards.add(gameDeck.get(0));
