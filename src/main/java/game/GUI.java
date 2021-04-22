@@ -9,10 +9,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.esotericsoftware.kryonet.Connection;
 import netcode.GameClient;
 import netcode.Host;
+import player.IPlayer;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class GUI implements ApplicationListener {
     private enum GUI_STATE {MAIN_MENU, HOST_LOBBY, CLIENT_LOBBY, IN_GAME}
@@ -73,6 +76,9 @@ public class GUI implements ApplicationListener {
                 break;
             case HOST_LOBBY:
                 batch.draw(textures.get("MainMenuBG"), 0, 0, 700, 800);
+                for(Map.Entry<Connection, IPlayer> entry : host.playerMap.entrySet()){
+                    //draw somethings
+                }
                 break;
             case CLIENT_LOBBY:
                 batch.draw(textures.get("MainMenuBG"), 0, 0, 700, 800);

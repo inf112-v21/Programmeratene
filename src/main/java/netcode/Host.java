@@ -19,7 +19,7 @@ public class Host extends Listener {
 
     GameClient gameClient;
 
-    HashMap<Connection,IPlayer> playerMap;
+    public HashMap<Connection,IPlayer> playerMap;
     ArrayList<Vector2> spawns;
     ArrayList<Integer> flags;
     int registersReceived = 0;
