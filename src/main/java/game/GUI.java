@@ -55,49 +55,53 @@ public class GUI implements ApplicationListener {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        switch(currentState){
-            case MAIN_MENU:
-                batch.draw(textures.get("MainMenuBG"), 0, 0, 700, 800);
-                if(Gdx.input.getX() > 100 && Gdx.input.getX() < 600 && Gdx.input.getY() > 600 && Gdx.input.getY() < 800) {
-                    batch.draw(textures.get("JoinGameHover"), 100, 0, 500, 200);
-                    if(Gdx.input.isTouched()){
-                        Gdx.input.getTextInput(textlistener,"Enter Host IP","","72.199.1.167");
-                    }
-                } else {
-                    batch.draw(textures.get("JoinGame"), 100, 0, 500, 200);
+        if(currentState.equals(GUI_STATE.MAIN_MENU)){
+            batch.draw(textures.get("MainMenuBG"), 0, 0, 700, 800);
+            if(Gdx.input.getX() > 100 && Gdx.input.getX() < 600 && Gdx.input.getY() > 600 && Gdx.input.getY() < 800) {
+                batch.draw(textures.get("JoinGameHover"), 100, 0, 500, 200);
+                if(Gdx.input.isTouched()){
+                    Gdx.input.getTextInput(textlistener,"Enter Host IP","","72.199.1.167");
                 }
-                if(Gdx.input.getX() > 100 && Gdx.input.getX() < 600 && Gdx.input.getY() > 375 && Gdx.input.getY() < 575) {
-                    batch.draw(textures.get("HostGameHover"), 100, 225, 500, 200);
-                    if(Gdx.input.isTouched())
-                        startAsHost();
-                } else {
-                    batch.draw(textures.get("HostGame"), 100, 225, 500, 200);
+            } else {
+                batch.draw(textures.get("JoinGame"), 100, 0, 500, 200);
+            }
+            if(Gdx.input.getX() > 100 && Gdx.input.getX() < 600 && Gdx.input.getY() > 375 && Gdx.input.getY() < 575) {
+                batch.draw(textures.get("HostGameHover"), 100, 225, 500, 200);
+                if(Gdx.input.isTouched())
+                    startAsHost();
+            } else {
+                batch.draw(textures.get("HostGame"), 100, 225, 500, 200);
+            }
+        }
+        else if(currentState.equals(GUI_STATE.HOST_LOBBY)){
+            batch.draw(textures.get("MainMenuBG"), 0, 0, 700, 800);
+            GlyphLayout playerHeader = new GlyphLayout(font,"Connected players:");
+            font.draw(batch, playerHeader, 500, 500);
+            for(Map.Entry<Connection, IPlayer> entry : host.playerMap.entrySet()){
+                GlyphLayout playerEntry = new GlyphLayout(font, "Name: " + entry.getValue().getPlayerName() +"\nIP:"+entry.getKey().getRemoteAddressTCP().getHostString());
+                font.draw(batch, playerEntry, 500, 500 - host.playerMap.size()*40);
+            }
+            if(Gdx.input.getX() > 100 && Gdx.input.getX() < 600 && Gdx.input.getY() > 600 && Gdx.input.getY() < 800) {
+                batch.draw(textures.get("StartGameHover"), 100, 0, 500, 200);
+                if(Gdx.input.isTouched()){
+                    currentState = GUI_STATE.IN_GAME;
+                    host.dealCards();
                 }
-
-                break;
-            case HOST_LOBBY:
-                batch.draw(textures.get("MainMenuBG"), 0, 0, 700, 800);
-                GlyphLayout playerHeader = new GlyphLayout(font,"Connected players:");
-                font.draw(batch, playerHeader, 500, 500);
-                for(Map.Entry<Connection, IPlayer> entry : host.playerMap.entrySet()){
-                    GlyphLayout playerEntry = new GlyphLayout(font, "Name: " + entry.getValue().getPlayerName() +"\nIP:"+entry.getKey().getRemoteAddressTCP().getHostString());
-                    font.draw(batch, playerEntry, 500, 500 - host.playerMap.size()*40);
-                }
-                if(Gdx.input.getX() > 100 && Gdx.input.getX() < 600 && Gdx.input.getY() > 600 && Gdx.input.getY() < 800) {
-                    batch.draw(textures.get("StartGameHover"), 100, 0, 500, 200);
-                    if(Gdx.input.isTouched()){
-                        currentState = GUI_STATE.IN_GAME;
-                        host.dealCards();
-                    }
-                } else {
-                    batch.draw(textures.get("StartGame"), 100, 0, 500, 200);
-                }
-                break;
-            case CLIENT_LOBBY:
-                batch.draw(textures.get("MainMenuBG"), 0, 0, 700, 800);
-                break;
-            case IN_GAME:
-                renderer.render();
+            } else {
+                batch.draw(textures.get("StartGame"), 100, 0, 500, 200);
+            }
+        }
+        else if(currentState.equals(GUI_STATE.CLIENT_LOBBY)){
+            batch.draw(textures.get("MainMenuBG"), 0, 0, 700, 800);
+            GlyphLayout playerHeader = new GlyphLayout(font, "Connected players:");
+            font.draw(batch, playerHeader, 500, 500);
+            for(Map.Entry<Connection, IPlayer> entry : host.playerMap.entrySet()){
+                GlyphLayout playerEntry = new GlyphLayout(font, "Name: " + entry.getValue().getPlayerName() +"\nIP:"+entry.getKey().getRemoteAddressTCP().getHostString());
+                font.draw(batch, playerEntry, 500, 500 - host.playerMap.size()*40);
+            }
+        }
+        else if(currentState.equals(GUI_STATE.IN_GAME)){
+            renderer.render();
         }
         batch.end();
     }
