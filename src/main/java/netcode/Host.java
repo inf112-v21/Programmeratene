@@ -159,7 +159,7 @@ public class Host extends Listener {
             case "player":
                 Vector2 newPosition = player.getPos().cpy().add(new Vector2(-1,0));
                 Collection<IPlayer> otherPlayers = playerMap.values();
-                IPlayer collidingPlayer = otherPlayers.stream().filter(x -> x.getPos() == player.getPos()).collect(Collectors.toList()).get(0);
+                IPlayer collidingPlayer = otherPlayers.stream().filter(x -> x.getPos() == player.getPos() && x.getPlayerName() != player.getPlayerName()).collect(Collectors.toList()).get(0);
                 collidingPlayer.setPos(newPosition);
         }
     }
