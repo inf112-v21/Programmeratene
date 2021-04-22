@@ -1,6 +1,7 @@
 package netcode;
 
 import card.*;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
@@ -155,6 +156,11 @@ public class Host extends Listener {
             case "hole":
                 player.applyDamage(9);
                 player.setOrientation(Direction.NORTH);
+            case "player":
+                Vector2 newPosition = player.getPos().cpy().add(new Vector2(-1,0));
+                Collection<IPlayer> otherPlayers = playerMap.values();
+                IPlayer collidingPlayer = otherPlayers.stream().filter(x -> x.getPos() == player.getPos()).collect(Collectors.toList()).get(0);
+                collidingPlayer.setPos(newPosition);
         }
     }
 

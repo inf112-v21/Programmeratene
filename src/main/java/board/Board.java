@@ -201,6 +201,8 @@ public class Board implements IBoard {
             return "flag";
         else if(layers.get("Hole").getCell((int) pos.x, (int) pos.y) != null)
             return "hole";
+        else if(layers.get("Player").getCell((int) pos.x, (int) pos.y) != null)
+            return "player";
 
         return "floortile";
     }
