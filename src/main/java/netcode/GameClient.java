@@ -16,6 +16,7 @@ public class GameClient extends Listener {
     private static final int tcpPort = 27960;
     final Client kryoClient;
     public final IBoard board;
+    public boolean inLobby = true;
 
     public GameClient(boolean isHost) {
         kryoClient = new Client();
@@ -48,6 +49,7 @@ public class GameClient extends Listener {
 
     public void received(Connection c, Object p) {
         if(p instanceof CardListPacket){
+            inLobby = false;
             ArrayList<ICard> playerHand = ((CardListPacket) p).cards;
             System.out.println("══════════════════\n═ CARDS RECEIVED ═\n══════════════════");
 

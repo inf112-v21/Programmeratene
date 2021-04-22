@@ -17,6 +17,7 @@ import player.IPlayer;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class GUI implements ApplicationListener {
     private enum GUI_STATE {MAIN_MENU, HOST_LOBBY, CLIENT_LOBBY, IN_GAME}
@@ -61,6 +62,9 @@ public class GUI implements ApplicationListener {
                 batch.draw(textures.get("JoinGameHover"), 100, 0, 500, 200);
                 if(Gdx.input.isTouched()){
                     Gdx.input.getTextInput(textlistener,"Enter Host IP","","72.199.1.167");
+                    Scanner sc = new Scanner(System.in);
+                    System.out.print("Input IP to connect to: ");
+                    startAsClient(sc.nextLine());
                 }
             } else {
                 batch.draw(textures.get("JoinGame"), 100, 0, 500, 200);
@@ -99,6 +103,8 @@ public class GUI implements ApplicationListener {
                 GlyphLayout playerEntry = new GlyphLayout(font, "Name: " + entry.getValue().getPlayerName() +"\nIP:"+entry.getKey().getRemoteAddressTCP().getHostString());
                 font.draw(batch, playerEntry, 500, 500 - host.playerMap.size()*40);
             }
+            if(!gameClient.inLobby)
+                currentState = GUI_STATE.IN_GAME;
         }
         else if(currentState.equals(GUI_STATE.IN_GAME)){
             renderer.render();
