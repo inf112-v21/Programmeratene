@@ -47,11 +47,6 @@ public class Host extends Listener {
         playerMap.put(c, newPlayer);
 
         sendPlayerData(); //Make alle clients add the new player
-
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Wait for more players? (y/n): ");
-        if (sc.nextLine().equals("n"))
-            dealCards();
     }
 
     //This is run when we receive a packet

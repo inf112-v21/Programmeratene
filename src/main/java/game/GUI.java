@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.esotericsoftware.kryonet.Connection;
@@ -36,7 +37,7 @@ public class GUI implements ApplicationListener {
     public void create() {
         batch = new SpriteBatch();
         font = new BitmapFont();
-        font.setColor(Color.RED);
+        font.setColor(Color.WHITE);
 
         initTextures();
         textlistener = new TextInput(this);
@@ -76,8 +77,20 @@ public class GUI implements ApplicationListener {
                 break;
             case HOST_LOBBY:
                 batch.draw(textures.get("MainMenuBG"), 0, 0, 700, 800);
+                GlyphLayout playerHeader = new GlyphLayout(font,"Connected players:");
+                font.draw(batch, playerHeader, 500, 500);
                 for(Map.Entry<Connection, IPlayer> entry : host.playerMap.entrySet()){
-                    //draw somethings
+                    GlyphLayout playerEntry = new GlyphLayout(font, "Name: " + entry.getValue().getPlayerName() +"\nIP:"+entry.getKey().getRemoteAddressTCP().getHostString());
+                    font.draw(batch, playerEntry, 500, 500 - host.playerMap.size()*40);
+                }
+                if(Gdx.input.getX() > 100 && Gdx.input.getX() < 600 && Gdx.input.getY() > 600 && Gdx.input.getY() < 800) {
+                    batch.draw(textures.get("StartGameHover"), 100, 0, 500, 200);
+                    if(Gdx.input.isTouched()){
+                        currentState = GUI_STATE.IN_GAME;
+                        host.dealCards();
+                    }
+                } else {
+                    batch.draw(textures.get("StartGame"), 100, 0, 500, 200);
                 }
                 break;
             case CLIENT_LOBBY:
@@ -112,7 +125,7 @@ public class GUI implements ApplicationListener {
             renderer = new OrthogonalTiledMapRenderer(gameClient.board.getTiledMap(), (1f/gameClient.board.getTileTextureSize()));
             renderer.setView(camera);
 
-            currentState = GUI_STATE.IN_GAME;
+            currentState = GUI_STATE.HOST_LOBBY;
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Kryonet server couldn't bind to ports");
@@ -130,7 +143,7 @@ public class GUI implements ApplicationListener {
             renderer = new OrthogonalTiledMapRenderer(gameClient.board.getTiledMap(), (1f/gameClient.board.getTileTextureSize()));
             renderer.setView(camera);
 
-            currentState = GUI_STATE.IN_GAME;
+            currentState = GUI_STATE.CLIENT_LOBBY;
         }
     }
 
@@ -141,5 +154,7 @@ public class GUI implements ApplicationListener {
         textures.put("JoinGameHover", new Texture("assets/menu/joingame_hover.png"));
         textures.put("HostGame", new Texture("assets/menu/hostgame.png"));
         textures.put("HostGameHover", new Texture("assets/menu/hostgame_hover.png"));
+        textures.put("StartGame", new Texture("assets/menu/startgame.png"));
+        textures.put("StartGameHover", new Texture("assets/menu/startgame_hover.png"));
     }
 }
