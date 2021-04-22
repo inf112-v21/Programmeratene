@@ -13,7 +13,6 @@ import netcode.GameClient;
 import netcode.Host;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class GUI implements ApplicationListener {
     private enum GUI_STATE {MAIN_MENU, HOST_LOBBY, CLIENT_LOBBY, IN_GAME}
@@ -117,11 +116,15 @@ public class GUI implements ApplicationListener {
     public void startAsClient(String ip){
         gameClient = new GameClient();
         if(!gameClient.connectTo(ip)){
-            Scanner sc = new Scanner(System.in);
-            System.out.print("Connection failed, Ctrl+C to exit or re-enter IP: ");
-            startAsClient(sc.nextLine());
+            System.out.print("Connection failed, try again");
         } else {
-            currentState = GUI_STATE.HOST_LOBBY;
+            camera = new OrthographicCamera();
+            camera.setToOrtho(false, gameClient.board.getBOARD_WIDTH(),gameClient.board.getBOARD_HEIGHT());
+            camera.update();
+            renderer = new OrthogonalTiledMapRenderer(gameClient.board.getTiledMap(), (1f/gameClient.board.getTileTextureSize()));
+            renderer.setView(camera);
+
+            currentState = GUI_STATE.IN_GAME;
         }
     }
 
