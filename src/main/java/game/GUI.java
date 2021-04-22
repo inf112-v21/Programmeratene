@@ -81,9 +81,11 @@ public class GUI implements ApplicationListener {
             batch.draw(textures.get("MainMenuBG"), 0, 0, 700, 800);
             GlyphLayout playerHeader = new GlyphLayout(font,"Connected players:");
             font.draw(batch, playerHeader, 500, 500);
+            int i = 1;
             for(Map.Entry<Connection, IPlayer> entry : host.playerMap.entrySet()){
                 GlyphLayout playerEntry = new GlyphLayout(font, "Name: " + entry.getValue().getPlayerName() +"\nIP:"+entry.getKey().getRemoteAddressTCP().getHostString());
-                font.draw(batch, playerEntry, 500, 500 - host.playerMap.size()*40);
+                font.draw(batch, playerEntry, 500, 500 - i*40);
+                i++;
             }
             if(Gdx.input.getX() > 100 && Gdx.input.getX() < 600 && Gdx.input.getY() > 600 && Gdx.input.getY() < 800) {
                 batch.draw(textures.get("StartGameHover"), 100, 0, 500, 200);
@@ -99,9 +101,11 @@ public class GUI implements ApplicationListener {
             batch.draw(textures.get("MainMenuBG"), 0, 0, 700, 800);
             GlyphLayout playerHeader = new GlyphLayout(font, "Connected players:");
             font.draw(batch, playerHeader, 500, 500);
+            int i = 1;
             for(IPlayer player : gameClient.board.getPlayers()){
                 GlyphLayout playerEntry = new GlyphLayout(font, "Name: " + player.getPlayerName());
-                font.draw(batch, playerEntry, 500, 500 - gameClient.board.getPlayers().size()*40);
+                font.draw(batch, playerEntry, 500, 500 - i*40);
+                i++;
             }
             if(!gameClient.inLobby)
                 currentState = GUI_STATE.IN_GAME;
