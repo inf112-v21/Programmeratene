@@ -208,6 +208,10 @@ public class Board implements IBoard {
         return spawns;
     }
 
+    public ArrayList<IPlayer> getPlayers() {
+        return players;
+    }
+
     public HashMap<String, TiledMapTileLayer> getLayers() {
         return layers;
     }

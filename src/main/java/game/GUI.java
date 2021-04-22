@@ -99,8 +99,8 @@ public class GUI implements ApplicationListener {
             batch.draw(textures.get("MainMenuBG"), 0, 0, 700, 800);
             GlyphLayout playerHeader = new GlyphLayout(font, "Connected players:");
             font.draw(batch, playerHeader, 500, 500);
-            for(Map.Entry<Connection, IPlayer> entry : host.playerMap.entrySet()){
-                GlyphLayout playerEntry = new GlyphLayout(font, "Name: " + entry.getValue().getPlayerName() +"\nIP:"+entry.getKey().getRemoteAddressTCP().getHostString());
+            for(IPlayer player : gameClient.board.getPlayers()){
+                GlyphLayout playerEntry = new GlyphLayout(font, "Name: " + player.getPlayerName());
                 font.draw(batch, playerEntry, 500, 500 - host.playerMap.size()*40);
             }
             if(!gameClient.inLobby)
