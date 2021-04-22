@@ -138,9 +138,7 @@ public class GUI implements ApplicationListener {
 
     public void startAsClient(String ip){
         gameClient = new GameClient();
-        if(!gameClient.connectTo(ip)){
-            System.out.print("Connection failed, try again");
-        } else {
+        if(gameClient.connectTo(ip)){
             camera = new OrthographicCamera();
             camera.setToOrtho(false, gameClient.board.getBOARD_WIDTH(),gameClient.board.getBOARD_HEIGHT());
             camera.update();
