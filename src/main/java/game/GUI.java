@@ -107,7 +107,7 @@ public class GUI implements ApplicationListener {
                 font.draw(batch, playerEntry, 500, 500 - i*40);
                 i++;
             }
-            if(!gameClient.inLobby)
+            if(gameClient.gameState != GameClient.GAME_STATE.LOBBY)
                 currentState = GUI_STATE.IN_GAME;
         }
         else if(currentState.equals(GUI_STATE.IN_GAME)){
