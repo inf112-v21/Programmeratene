@@ -32,6 +32,14 @@ Uni project where we have to make a RoboRally game with libgdx. This game suppor
 6. After every robot has done all movements for that round, we get a new round with new cards   
 7. The first one to reach the flag wins. Be aware of holes and other dangers!
 
+### "Enter Host IP? What's that?"
+#### If playing locally:
+1. Host can open a command prompt and type 'ipconfig'. 
+2. Look for the numbers labeled 'IPv4'
+#### If playing on different networks:
+1. The host must port-forward port '27960' (Look up a guide specific to your router!)
+2. Find your public IP on [WhatsMyIP](https://www.whatsmyip.org/)
+
 ## How to run tests
 1. Clone repository from https://github.com/inf112-v21/Programmeratene
 2. Open repository in your IDE as a Maven project
