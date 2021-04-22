@@ -1,13 +1,11 @@
 package player;
 
-import game.Direction;
 import card.*;
+import game.Direction;
 import com.badlogic.gdx.math.Vector2;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public abstract class AbstractPlayer implements IPlayer {
+public class Player implements IPlayer{
     String playerName;
     ArrayList<ICard> deck; //Tildelte kort
     ArrayList<ICard> registers; //Valgte kort
@@ -19,15 +17,13 @@ public abstract class AbstractPlayer implements IPlayer {
     Vector2 playerPos;
     Vector2 spawnPos;
 
-    AbstractPlayer(){
+    Player(){}
 
-    }
-
-    AbstractPlayer(String playerName){
+    public Player(String playerName){
         this(playerName, new Vector2(0,0));
     }
 
-    AbstractPlayer(String playerName, Vector2 spawnPos){
+    public Player(String playerName, Vector2 spawnPos){
         this.playerName = playerName;
         this.deck = new ArrayList<>();
         this.registers = new ArrayList<>();

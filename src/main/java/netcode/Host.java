@@ -1,19 +1,14 @@
 package netcode;
 
 import card.*;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import player.*;
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import game.Direction;
-import netcode.packets.CardListPacket;
-import netcode.packets.PlayerDataPacket;
-import netcode.packets.PlayerWonPacket;
-import player.HumanPlayer;
-import player.IPlayer;
+import netcode.packets.*;
 
-import java.net.StandardSocketOptions;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -39,8 +34,8 @@ public class Host extends Listener {
 
         playerMap = new HashMap<>();
         gameClient = new GameClient(true);
-        spawns = gameClient.getGame().getBoard().getSpawns();
-        flags = gameClient.getGame().getBoard().getFlags();
+        spawns = gameClient.board.getSpawns();
+        flags = gameClient.board.getFlags();
     }
 
     //This is run when a connection is received
@@ -48,7 +43,7 @@ public class Host extends Listener {
         System.out.println("Received a connection from "+c.getRemoteAddressTCP().getHostString());
         c.setTimeout(0);
 
-        IPlayer newPlayer = new HumanPlayer("Player "+(playerMap.size()+1), spawns.get(playerMap.size()));
+        IPlayer newPlayer = new Player("Player "+(playerMap.size()+1), spawns.get(playerMap.size()));
         playerMap.put(c, newPlayer);
 
         sendPlayerData(); //Make alle clients add the new player
@@ -90,7 +85,7 @@ public class Host extends Listener {
                 ICard currentCard = player.getRegisters().get(i);
                 if (currentCard instanceof CardMove) {
                     if (((CardMove) currentCard).getSteps() == -1) {
-                        if(gameClient.game.getBoard().canMove(player.getPos(), player.getOrientation().getReverse())) {
+                        if(gameClient.board.canMove(player.getPos(), player.getOrientation().getReverse())) {
                             //Using getReverse in canMove function since we are interested in the opposite direction here
                             player.moveRobot(-1);
                             collisionCheck(player);
@@ -104,7 +99,7 @@ public class Host extends Listener {
                         }
                     }
                     for (int j = 0; j < ((CardMove) currentCard).getSteps(); j++) {
-                        if (gameClient.game.getBoard().canMove(player.getPos(), player.getOrientation())) {
+                        if (gameClient.board.canMove(player.getPos(), player.getOrientation())) {
                             player.moveRobot(1);
                             collisionCheck(player);
                             positionCheck(player); //Check for hole/flag
@@ -145,10 +140,10 @@ public class Host extends Listener {
     }
 
     public void positionCheck(IPlayer player){
-        String standingOn = gameClient.getGame().getBoard().getElementInPos(player.getPos());
+        String standingOn = gameClient.board.getElementInPos(player.getPos());
         switch (standingOn){
             case "flag":
-                int flag = gameClient.getGame().getBoard().getLayers().get("Flag").getCell((int) player.getPos().x, (int) player.getPos().y).getTile().getId();
+                int flag = gameClient.board.getLayers().get("Flag").getCell((int) player.getPos().x, (int) player.getPos().y).getTile().getId();
                 if(flag == flags.get(player.getVisited().size()))
                     player.addVisitedFlag(flag);
                 if(player.getVisited().size() >= flags.size()) {

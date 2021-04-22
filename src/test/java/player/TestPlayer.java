@@ -6,11 +6,11 @@ import game.Direction;
 import org.junit.Test;
 
 
-public class AbstractPlayerTest {
+public class TestPlayer {
 
     @Test
     public void testApplyDamage() {
-        ComputerPlayer p = new ComputerPlayer("p1");
+        Player p = new Player("p1");
         p.applyDamage(1);
 
         assertEquals(1, p.damageTokens);
@@ -18,7 +18,7 @@ public class AbstractPlayerTest {
 
     @Test
     public void testApplyDamageOverflow() {
-        ComputerPlayer p = new ComputerPlayer("p1");
+        Player p = new Player("p1");
         p.applyDamage(9);
 
         assertEquals(0, p.damageTokens);
@@ -27,7 +27,7 @@ public class AbstractPlayerTest {
 
     @Test
     public void testRepair() {
-        ComputerPlayer p = new ComputerPlayer("p1");
+        Player p = new Player("p1");
         p.applyDamage(2);
         p.repair(1);
 
@@ -36,7 +36,7 @@ public class AbstractPlayerTest {
 
     @Test
     public void testRepairOverflow() {
-        ComputerPlayer p = new ComputerPlayer("p1");
+        Player p = new Player("p1");
         p.applyDamage(2);
         p.repair(3);
 
@@ -45,7 +45,7 @@ public class AbstractPlayerTest {
 
     @Test
     public void testMovementForward() {
-        ComputerPlayer p = new ComputerPlayer("p1");
+        Player p = new Player("p1");
         p.moveRobot(1);
 
         //Should be facing NORTH at pos (0,1)
@@ -56,7 +56,7 @@ public class AbstractPlayerTest {
 
     @Test
     public void testMovementTurnRight() {
-        ComputerPlayer p = new ComputerPlayer("p1");
+        Player p = new Player("p1");
         p.moveRobot(1);
         p.rotateRobot(1);
         p.moveRobot(1);
@@ -69,7 +69,7 @@ public class AbstractPlayerTest {
 
     @Test
     public void testMovementTurnLeft() {
-        ComputerPlayer p = new ComputerPlayer("p1");
+        Player p = new Player("p1");
         p.moveRobot(1);
         p.rotateRobot(-1);
         p.moveRobot(1);
@@ -82,7 +82,7 @@ public class AbstractPlayerTest {
 
     @Test
     public void testMovementAll() {
-        ComputerPlayer p = new ComputerPlayer("p1");
+        Player p = new Player("p1");
         p.moveRobot(1);
         p.rotateRobot(1);
         p.moveRobot(3);

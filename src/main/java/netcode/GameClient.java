@@ -1,13 +1,11 @@
 package netcode;
 
+import board.*;
 import card.ICard;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Client;
-import game.Game;
-import netcode.packets.CardListPacket;
-import netcode.packets.PlayerDataPacket;
-import netcode.packets.PlayerWonPacket;
+import netcode.packets.*;
 import player.IPlayer;
 
 import java.util.ArrayList;
@@ -17,7 +15,7 @@ public class GameClient extends Listener {
     private static final int udpPort = 27960;
     private static final int tcpPort = 27960;
     final Client kryoClient;
-    final Game game;
+    public final IBoard board;
 
     public GameClient(boolean isHost) {
         kryoClient = new Client();
@@ -25,7 +23,7 @@ public class GameClient extends Listener {
         kryoClient.start();
         kryoClient.addListener(this);
 
-        game = new Game();
+        board = new Board();
         if(isHost)
             connectTo("localhost");
     }
@@ -61,8 +59,8 @@ public class GameClient extends Listener {
         }
         else if(p instanceof PlayerDataPacket){
             ArrayList<IPlayer> players = ((PlayerDataPacket) p).players;
-            game.getBoard().setPlayers(players);
-            game.getBoard().drawPlayers();
+            board.setPlayers(players);
+            board.drawPlayers();
             if(players.stream().noneMatch(IPlayer::getAlive)){
                 System.out.println("All players died!");
                 kryoClient.stop();
@@ -99,9 +97,4 @@ public class GameClient extends Listener {
         System.out.println("Cards chosen: " + list);
         return list;
     }
-
-    public Game getGame() {
-        return game;
-    }
-
 }
