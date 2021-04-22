@@ -145,12 +145,7 @@ public class Board implements IBoard {
             for(int x=0; x<BOARD_WIDTH; x++)
                 if(layers.get("Flag").getCell(x, y) != null)
                     flags.add(layers.get("Flag").getCell(x,y).getTile().getId());
-        flags.sort(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1 - o2;
-            }
-        });
+        flags.sort(Comparator.comparingInt(o -> o));
 
         return flags;
     }
@@ -211,6 +206,7 @@ public class Board implements IBoard {
             for(int x=0; x<BOARD_WIDTH; x++)
                 if(layers.get("Spawn").getCell(x, y) != null)
                     spawns.add(new Vector2(x, y));
+        spawns.sort(Comparator.comparingInt(o -> layers.get("Spawn").getCell((int) o.x, (int) o.y).getTile().getId()));
         return spawns;
     }
 
