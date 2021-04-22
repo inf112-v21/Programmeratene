@@ -101,7 +101,7 @@ public class GUI implements ApplicationListener {
             font.draw(batch, playerHeader, 500, 500);
             for(IPlayer player : gameClient.board.getPlayers()){
                 GlyphLayout playerEntry = new GlyphLayout(font, "Name: " + player.getPlayerName());
-                font.draw(batch, playerEntry, 500, 500 - host.playerMap.size()*40);
+                font.draw(batch, playerEntry, 500, 500 - gameClient.board.getPlayers().size()*40);
             }
             if(!gameClient.inLobby)
                 currentState = GUI_STATE.IN_GAME;
