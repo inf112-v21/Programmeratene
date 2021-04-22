@@ -1,6 +1,7 @@
 package netcode;
 
 import card.*;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
@@ -12,6 +13,7 @@ import netcode.packets.PlayerWonPacket;
 import player.HumanPlayer;
 import player.IPlayer;
 
+import java.net.StandardSocketOptions;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -91,6 +93,7 @@ public class Host extends Listener {
                         if(gameClient.game.getBoard().canMove(player.getPos(), player.getOrientation().getReverse())) {
                             //Using getReverse in canMove function since we are interested in the opposite direction here
                             player.moveRobot(-1);
+                            collisionCheck(player);
                             positionCheck(player); //Check for hole/flag
                             sendPlayerData();
                             try { //Delay for syns skyld
@@ -103,6 +106,7 @@ public class Host extends Listener {
                     for (int j = 0; j < ((CardMove) currentCard).getSteps(); j++) {
                         if (gameClient.game.getBoard().canMove(player.getPos(), player.getOrientation())) {
                             player.moveRobot(1);
+                            collisionCheck(player);
                             positionCheck(player); //Check for hole/flag
                             sendPlayerData();
                             try { //Delay for syns skyld
@@ -155,6 +159,17 @@ public class Host extends Listener {
             case "hole":
                 player.applyDamage(9);
                 player.setOrientation(Direction.NORTH);
+        }
+    }
+
+    public void collisionCheck(IPlayer player){
+        for(IPlayer otherPlayer : playerMap.values()){
+            if(otherPlayer.getPos().equals(player.getPos())){
+                if(!otherPlayer.getPlayerName().equals(player.getPlayerName())){
+                    System.out.println("Kollisjon funnet");
+                    otherPlayer.setPos(otherPlayer.getPos().cpy().add(player.getOrientation().getVector()));
+                }
+            }
         }
     }
 
