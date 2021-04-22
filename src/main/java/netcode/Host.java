@@ -163,12 +163,13 @@ public class Host extends Listener {
     }
 
     public void collisionCheck(IPlayer player){
-        Vector2 newPosition = player.getPos().cpy().add(new Vector2(-1,0));
-        List<IPlayer> overlappingPlayers = playerMap.values().stream().filter(x -> x.getPos() == player.getPos() && x.getPlayerName() != player.getPlayerName()).collect(Collectors.toList());
-        if(overlappingPlayers.size() > 0){
-            IPlayer collidingPlayer = overlappingPlayers.get(0);
-            collidingPlayer.setPos(newPosition);
-            System.out.println("Kollisjon funnet");
+        for(IPlayer otherPlayer : playerMap.values()){
+            if(otherPlayer.getPos().equals(player.getPos())){
+                if(!otherPlayer.getPlayerName().equals(player.getPlayerName())){
+                    System.out.println("Kollisjon funnet");
+                    otherPlayer.setPos(otherPlayer.getPos().cpy().add(player.getOrientation().getVector()));
+                }
+            }
         }
     }
 
