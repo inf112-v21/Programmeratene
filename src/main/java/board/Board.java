@@ -1,6 +1,5 @@
 package board;
 
-import board.boardelements.IBoardElement;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
@@ -160,7 +159,6 @@ public class Board implements IBoard {
         for(int i=0; i<players.size(); i++){
             IPlayer player = players.get(i);
             Vector2 pos = player.getPos();
-            //System.out.println("Drawing position of player "+player.getPlayerName()+" in position ("+pos.x+", "+pos.y+") facing "+player.getOrientation());
 
             switch (player.getOrientation()){
                 case NORTH:

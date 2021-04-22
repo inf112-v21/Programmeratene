@@ -17,8 +17,7 @@ public class CardTurn implements ICard{
         this.priority = priority;
     }
 
-    public CardTurn(){
-    }
+    public CardTurn(){}
 
     @Override
     public String toString() {

@@ -18,8 +18,7 @@ public class CardMove implements ICard{
         this.priority = priority;
     }
 
-    public CardMove(){
-    }
+    public CardMove(){}
 
     @Override
     public String toString() {
