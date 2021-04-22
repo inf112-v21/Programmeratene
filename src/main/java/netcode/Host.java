@@ -13,6 +13,7 @@ import netcode.packets.PlayerWonPacket;
 import player.HumanPlayer;
 import player.IPlayer;
 
+import java.net.StandardSocketOptions;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -92,6 +93,7 @@ public class Host extends Listener {
                         if(gameClient.game.getBoard().canMove(player.getPos(), player.getOrientation().getReverse())) {
                             //Using getReverse in canMove function since we are interested in the opposite direction here
                             player.moveRobot(-1);
+                            collisionCheck(player);
                             positionCheck(player); //Check for hole/flag
                             sendPlayerData();
                             try { //Delay for syns skyld
@@ -104,6 +106,7 @@ public class Host extends Listener {
                     for (int j = 0; j < ((CardMove) currentCard).getSteps(); j++) {
                         if (gameClient.game.getBoard().canMove(player.getPos(), player.getOrientation())) {
                             player.moveRobot(1);
+                            collisionCheck(player);
                             positionCheck(player); //Check for hole/flag
                             sendPlayerData();
                             try { //Delay for syns skyld
@@ -156,11 +159,16 @@ public class Host extends Listener {
             case "hole":
                 player.applyDamage(9);
                 player.setOrientation(Direction.NORTH);
-            case "player":
-                Vector2 newPosition = player.getPos().cpy().add(new Vector2(-1,0));
-                Collection<IPlayer> otherPlayers = playerMap.values();
-                IPlayer collidingPlayer = otherPlayers.stream().filter(x -> x.getPos() == player.getPos() && x.getPlayerName() != player.getPlayerName()).collect(Collectors.toList()).get(0);
-                collidingPlayer.setPos(newPosition);
+        }
+    }
+
+    public void collisionCheck(IPlayer player){
+        Vector2 newPosition = player.getPos().cpy().add(new Vector2(-1,0));
+        List<IPlayer> overlappingPlayers = playerMap.values().stream().filter(x -> x.getPos() == player.getPos() && x.getPlayerName() != player.getPlayerName()).collect(Collectors.toList());
+        if(overlappingPlayers.size() > 0){
+            IPlayer collidingPlayer = overlappingPlayers.get(0);
+            collidingPlayer.setPos(newPosition);
+            System.out.println("Kollisjon funnet");
         }
     }
 
