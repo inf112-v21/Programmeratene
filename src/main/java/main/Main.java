@@ -10,6 +10,7 @@ public class Main {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
         cfg.setTitle("RoboRally");
         cfg.setWindowedMode(700, 800);
+        cfg.setResizable(false);
 
         new Lwjgl3Application(new GUI(), cfg);
     }

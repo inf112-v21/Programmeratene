@@ -19,7 +19,7 @@ public class Host extends Listener {
 
     GameClient gameClient;
 
-    HashMap<Connection,IPlayer> playerMap;
+    public HashMap<Connection,IPlayer> playerMap;
     ArrayList<Vector2> spawns;
     ArrayList<Integer> flags;
     int registersReceived = 0;
@@ -47,11 +47,6 @@ public class Host extends Listener {
         playerMap.put(c, newPlayer);
 
         sendPlayerData(); //Make alle clients add the new player
-
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Wait for more players? (y/n): ");
-        if (sc.nextLine().equals("n"))
-            dealCards();
     }
 
     //This is run when we receive a packet

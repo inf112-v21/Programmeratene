@@ -47,6 +47,8 @@ public interface IBoard {
     /*
         GETTERS
      */
+    ArrayList<IPlayer> getPlayers();
+
     TiledMap getTiledMap();
 
     int getTileTextureSize();

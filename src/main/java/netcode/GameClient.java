@@ -12,10 +12,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameClient extends Listener {
+    public enum GAME_STATE {LOBBY, PICKING_CARDS, PROCESSING_ROUND, GAME_WON, GAME_OVER}
     private static final int udpPort = 27960;
     private static final int tcpPort = 27960;
     final Client kryoClient;
     public final IBoard board;
+    public GAME_STATE gameState = GAME_STATE.LOBBY;
 
     public GameClient(boolean isHost) {
         kryoClient = new Client();
@@ -48,6 +50,7 @@ public class GameClient extends Listener {
 
     public void received(Connection c, Object p) {
         if(p instanceof CardListPacket){
+            gameState = GAME_STATE.PICKING_CARDS;
             ArrayList<ICard> playerHand = ((CardListPacket) p).cards;
             System.out.println("══════════════════\n═ CARDS RECEIVED ═\n══════════════════");
 
@@ -56,19 +59,21 @@ public class GameClient extends Listener {
             CardListPacket chosenCardsPacket = new CardListPacket();
             chosenCardsPacket.cards = chosenCards;
             kryoClient.sendTCP(chosenCardsPacket);
+            gameState = GAME_STATE.PROCESSING_ROUND;
         }
         else if(p instanceof PlayerDataPacket){
             ArrayList<IPlayer> players = ((PlayerDataPacket) p).players;
             board.setPlayers(players);
             board.drawPlayers();
             if(players.stream().noneMatch(IPlayer::getAlive)){
-                System.out.println("All players died!");
+                gameState = GAME_STATE.GAME_OVER;
                 kryoClient.stop();
             }
         }
         else if(p instanceof PlayerWonPacket){
             IPlayer player = ((PlayerWonPacket) p).player;
             System.out.println(player.getPlayerName() + " won!");
+            gameState = GAME_STATE.GAME_WON;
             kryoClient.stop();
         }
     }
