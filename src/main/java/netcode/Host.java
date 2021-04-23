@@ -156,8 +156,13 @@ public class Host extends Listener {
         for(IPlayer otherPlayer : playerMap.values()){
             if(otherPlayer.getPos().equals(player.getPos())){
                 if(!otherPlayer.getPlayerName().equals(player.getPlayerName())){
-                    System.out.println("Kollisjon funnet");
-                    otherPlayer.setPos(otherPlayer.getPos().cpy().add(player.getOrientation().getVector()));
+                    if(gameClient.board.canMove(otherPlayer.getPos(), player.getOrientation())) {
+                        otherPlayer.setPos(otherPlayer.getPos().cpy().add(player.getOrientation().getVector()));
+                        collisionCheck(otherPlayer);
+                        positionCheck(otherPlayer);
+                    } else {
+                        player.moveRobot(-1); //go back to where you were pre-collision
+                    }
                 }
             }
         }
