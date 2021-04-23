@@ -77,6 +77,7 @@ Vi har valgt å bruke GitHub sitt project board for å holde styr på arbeidsopp
 
 Kjente bugs:
 - Join menyen tar oss til terminalen, og ikke et dedikert input. (Gdx.input.getTextInput() fungerer ikke som den skal)
+- Robotene bytter farger mens man connecter, men de siste fargene er de riktige.
 
 # Deloppgave 3: Produktleveranse og kodekvalitet
 
