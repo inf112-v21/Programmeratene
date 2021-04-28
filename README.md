@@ -23,14 +23,13 @@ Uni project where we have to make a RoboRally game with libgdx. This game suppor
 
 ## How to play
 1. See "How to run game"
-2. Choose between Host or Player
-3. If Host, wait for Clients to connect / If Client, enter Host IP to connect to Host \
-   3.1 If there are more than 2 players, host types "y" \
-   3.2 When everyone has connected, host types "n"
-4. Pick cards from the terminal with card numbers 1-9
-5. Pick your cards in preferred order, afterwards the robots will move in order after card priority (the highest first)
-6. After every robot has done all movements for that round, we get a new round with new cards   
-7. The first one to reach the flag wins. Be aware of holes and other dangers!
+2. Choose between "Host Game" or "Join Game"
+3. If Host, wait for Clients to connect / If Join, enter Host IP when prompted in the terminal
+4. When all players are connected, host clicks "Start game"
+5. Pick cards from the terminal with card numbers 1-9
+6. Pick your cards in preferred order, afterwards the robots will move in order after card priority (the highest first)
+7. After every robot has done all movements for that round, we get a new round with new cards   
+8. The first one to visit all flags in order wins. Be aware of holes and other dangers!
 
 ### "Enter Host IP? What's that?"
 #### If playing locally:
